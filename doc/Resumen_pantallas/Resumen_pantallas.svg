@@ -46,7 +46,7 @@
   </font>
  </defs>
  <defs class="TextShapeIndex">
-  <g ooo:slide="id1" ooo:id-list="id3 id4 id5 id6 id7 id8 id9 id10 id11 id12 id13 id14 id15 id16 id17 id18 id19 id20 id21 id22 id23 id24 id25 id26 id27 id28 id29 id30 id31 id32 id33 id34 id35 id36 id37 id38 id39 id40 id41"/>
+  <g ooo:slide="id1" ooo:id-list="id3 id4 id5 id6 id7 id8 id9 id10 id11 id12 id13 id14 id15 id16 id17 id18 id19 id20 id21 id22 id23 id24 id25 id26 id27 id28 id29 id30 id31 id32 id33 id34 id35 id36 id37 id38 id39 id40 id41 id42"/>
  </defs>
  <defs class="EmbeddedBulletChars">
   <g id="bullet-char-template(57356)" transform="scale(0.00048828125,-0.00048828125)">
@@ -438,6 +438,13 @@
       <g id="id41">
        <rect class="BoundingBox" stroke="none" fill="none" x="16280" y="13300" width="1901" height="601"/>
        <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="141px" font-weight="400"><tspan class="TextPosition" x="16635" y="13552"><tspan fill="rgb(0,0,0)" stroke="none">Dependiendo de la </tspan></tspan></tspan><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="141px" font-weight="400"><tspan class="TextPosition" x="16570" y="13709"><tspan fill="rgb(0,0,0)" stroke="none">respuesta del usuario</tspan></tspan></tspan></text>
+      </g>
+     </g>
+     <g class="com.sun.star.drawing.LineShape">
+      <g id="id42">
+       <rect class="BoundingBox" stroke="none" fill="none" x="1599" y="4600" width="1602" height="201"/>
+       <path fill="none" stroke="rgb(0,0,0)" d="M 1600,4700 L 2913,4700"/>
+       <path fill="rgb(0,0,0)" stroke="none" d="M 3200,4700 L 2900,4600 2900,4800 3200,4700 Z"/>
       </g>
      </g>
     </g>
