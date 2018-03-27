@@ -178,7 +178,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4u-3k-vw9">
                                 <rect key="frame" x="0.0" y="20" width="414" height="980"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y7B-H3-k7j">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y7B-H3-k7j">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ySv-gX-gbf">
@@ -296,7 +296,7 @@
                                             <constraint firstAttribute="trailingMargin" secondItem="ySv-gX-gbf" secondAttribute="trailing" constant="20" id="EsK-zy-a9s"/>
                                             <constraint firstItem="ySv-gX-gbf" firstAttribute="top" secondItem="y7B-H3-k7j" secondAttribute="topMargin" constant="20" id="LiW-Wc-NFs"/>
                                             <constraint firstItem="ySv-gX-gbf" firstAttribute="leading" secondItem="y7B-H3-k7j" secondAttribute="leadingMargin" constant="20" id="b4T-Kq-Qx9"/>
-                                            <constraint firstAttribute="height" constant="1400" id="gS1-dM-2I4"/>
+                                            <constraint firstAttribute="height" constant="1000" id="gS1-dM-2I4"/>
                                         </constraints>
                                     </view>
                                 </subviews>
