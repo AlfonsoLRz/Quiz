@@ -139,49 +139,21 @@
             </objects>
             <point key="canvasLocation" x="456.52173913043481" y="118.20652173913044"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="j0w-PK-vA7">
-            <objects>
-                <tableViewController id="ard-7C-pUq" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="10H-4x-ukQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="jLJ-Nw-ZWg">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jLJ-Nw-ZWg" id="B8j-T6-qbo">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="ard-7C-pUq" id="DNl-VX-8Hq"/>
-                            <outlet property="delegate" destination="ard-7C-pUq" id="1oq-ui-pf0"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lxV-pn-Jtq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1523" y="117"/>
-        </scene>
-        <!--View Controller-->
+        <!--Pregunta View Controller-->
         <scene sceneID="usr-Oy-bn5">
             <objects>
-                <viewController id="6QZ-jc-DuH" sceneMemberID="viewController">
-                    <view key="view" contentMode="center" id="wJt-yN-66C">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                <viewController id="6QZ-jc-DuH" customClass="PreguntaViewController" customModule="Quiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" clipsSubviews="YES" contentMode="center" id="wJt-yN-66C">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4u-3k-vw9">
-                                <rect key="frame" x="0.0" y="20" width="414" height="980"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y7B-H3-k7j">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y7B-H3-k7j">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ySv-gX-gbf">
+                                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ySv-gX-gbf">
                                                 <rect key="frame" x="28" y="28" width="358" height="856.66666666666663"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pregunta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFM-ZF-EYy">
@@ -191,7 +163,10 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Añada su pregunta" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dnb-vm-2B4">
-                                                        <rect key="frame" x="0.0" y="35.333333333333329" width="358" height="30"/>
+                                                        <rect key="frame" x="19" y="35.333333333333329" width="320" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="78m-iu-A1g"/>
+                                                        </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -210,9 +185,13 @@
                                                     </label>
                                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="NoImagen" translatesAutoresizingMaskIntoConstraints="NO" id="hdp-Ia-1LF">
                                                         <rect key="frame" x="19" y="145.66666666666663" width="320" height="320"/>
+                                                        <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="hdp-Ia-1LF" secondAttribute="height" multiplier="1:1" id="azd-4J-Ovz"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="98n-2b-poc" appends="YES" id="TTG-J1-xno"/>
+                                                        </connections>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lI5-k0-cof">
                                                         <rect key="frame" x="124" y="480.66666666666663" width="110" height="15"/>
@@ -227,7 +206,10 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Coloque su pregunta en una categoría" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IAY-y2-u1n">
-                                                        <rect key="frame" x="0.0" y="546" width="358" height="30"/>
+                                                        <rect key="frame" x="19" y="546" width="320" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="Oj6-FM-82s"/>
+                                                        </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -245,7 +227,10 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Coloque aquí la respuesta correcta" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KlM-Yq-SIx">
-                                                        <rect key="frame" x="0.0" y="656.33333333333337" width="358" height="30"/>
+                                                        <rect key="frame" x="19" y="656.33333333333337" width="320" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="bC2-Yn-Kl8"/>
+                                                        </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -257,37 +242,33 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Respuesta falsa" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ltw-Zk-SPt">
-                                                        <rect key="frame" x="0.0" y="736.66666666666663" width="358" height="30"/>
+                                                        <rect key="frame" x="19" y="736.66666666666663" width="320" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="o6X-tm-qFW"/>
+                                                        </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Respuesta falsa" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cuh-9z-jau">
-                                                        <rect key="frame" x="0.0" y="781.66666666666663" width="358" height="30"/>
+                                                        <rect key="frame" x="19" y="781.66666666666663" width="320" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="2YC-hz-fqc"/>
+                                                        </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Respuesta falsa" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HmE-Wm-o2a">
-                                                        <rect key="frame" x="0.0" y="826.66666666666663" width="358" height="30"/>
+                                                        <rect key="frame" x="19" y="826.66666666666663" width="320" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="SKI-2R-6JE"/>
+                                                        </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     </textField>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="Ltw-Zk-SPt" secondAttribute="trailing" id="8ch-kl-bFK"/>
-                                                    <constraint firstItem="Ltw-Zk-SPt" firstAttribute="leading" secondItem="ySv-gX-gbf" secondAttribute="leading" id="E4U-Lj-7te"/>
-                                                    <constraint firstAttribute="trailingMargin" secondItem="dnb-vm-2B4" secondAttribute="trailing" id="Oqo-cq-64a"/>
-                                                    <constraint firstItem="HmE-Wm-o2a" firstAttribute="leading" secondItem="ySv-gX-gbf" secondAttribute="leadingMargin" id="SOv-IS-DnF"/>
-                                                    <constraint firstAttribute="trailing" secondItem="cuh-9z-jau" secondAttribute="trailing" id="TKx-21-PC4"/>
-                                                    <constraint firstAttribute="trailingMargin" secondItem="HmE-Wm-o2a" secondAttribute="trailing" id="cP3-vC-VhK"/>
-                                                    <constraint firstItem="IAY-y2-u1n" firstAttribute="leading" secondItem="ySv-gX-gbf" secondAttribute="leadingMargin" id="hiL-Lm-yHq"/>
-                                                    <constraint firstItem="KlM-Yq-SIx" firstAttribute="leading" secondItem="ySv-gX-gbf" secondAttribute="leading" id="onO-eL-SgR"/>
-                                                    <constraint firstItem="cuh-9z-jau" firstAttribute="leading" secondItem="ySv-gX-gbf" secondAttribute="leading" id="rLl-8C-ZpS"/>
-                                                    <constraint firstAttribute="trailing" secondItem="KlM-Yq-SIx" secondAttribute="trailing" id="ufr-uL-iwm"/>
-                                                    <constraint firstAttribute="trailingMargin" secondItem="IAY-y2-u1n" secondAttribute="trailing" id="yeW-LW-wdw"/>
-                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -318,9 +299,22 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LxF-D7-x5d"/>
                     </view>
-                    <size key="freeformSize" width="414" height="1000"/>
+                    <connections>
+                        <outlet property="categoriaPregunta" destination="IAY-y2-u1n" id="Ru2-Bb-8Eq"/>
+                        <outlet property="imagenPregunta" destination="hdp-Ia-1LF" id="bwy-Pk-UC1"/>
+                        <outlet property="respuestaCorrecta" destination="KlM-Yq-SIx" id="imE-Ca-pKq"/>
+                        <outlet property="respuestaFalsa1" destination="Ltw-Zk-SPt" id="1df-3i-l8U"/>
+                        <outlet property="respuestaFalsa2" destination="cuh-9z-jau" id="W8U-YO-pIZ"/>
+                        <outlet property="respuestaFalsa3" destination="HmE-Wm-o2a" id="Zf2-kw-udP"/>
+                        <outlet property="tituloPregunta" destination="dnb-vm-2B4" id="Hij-ri-LT0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6pb-yR-VwK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="98n-2b-poc">
+                    <connections>
+                        <action selector="seleccionaImagenDeLibreria:" destination="6QZ-jc-DuH" id="UOx-3g-7Hn"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2549.275362318841" y="118.20652173913044"/>
         </scene>

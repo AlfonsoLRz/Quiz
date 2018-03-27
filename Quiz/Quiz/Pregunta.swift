@@ -15,14 +15,16 @@ class Pregunta : NSObject, NSCoding {
     //MARK: Atributos
     
     var titulo : String
-    var foto : UIImage?
+    var imagen : UIImage?
+    var categoria : String?
     var respuestas : [String]
     
     //MARK: Persistencia
     
     struct PropertyKey {
         static let titulo = "titulo"
-        static let foto = "foto"
+        static let imagen = "imagen"
+        static let categoria = "categoria"
         static let respuestas = "respuestas"
     }
     
@@ -33,9 +35,10 @@ class Pregunta : NSObject, NSCoding {
     
     //MARK: Constructor
     
-    init?(titulo: String, foto: UIImage?, respuestas : [String]) {
+    init?(titulo: String, imagen: UIImage?, categoria: String?, respuestas : [String]) {
         self.titulo = titulo
-        self.foto = foto
+        self.imagen = imagen
+        self.categoria = categoria
         self.respuestas = respuestas
         
         if respuestas.count != 4 {
@@ -47,7 +50,8 @@ class Pregunta : NSObject, NSCoding {
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(titulo, forKey: PropertyKey.titulo)
-        aCoder.encode(foto, forKey: PropertyKey.foto)
+        aCoder.encode(imagen, forKey: PropertyKey.imagen)
+        aCoder.encode(categoria, forKey: PropertyKey.categoria)
         aCoder.encode(respuestas, forKey: PropertyKey.respuestas)
     }
     
@@ -59,7 +63,10 @@ class Pregunta : NSObject, NSCoding {
         }
         
         // La foto es opcional.
-        let foto = aDecoder.decodeObject(forKey: PropertyKey.foto) as? UIImage
+        let imagen = aDecoder.decodeObject(forKey: PropertyKey.imagen) as? UIImage
+        
+        // La categoría también es opcional.
+        let categoria = aDecoder.decodeObject(forKey: PropertyKey.categoria) as? String
         
         // Las respuestas también son obligatorias.
         guard let respuestas = aDecoder.decodeObject(forKey: PropertyKey.respuestas) as? [String] else {
@@ -67,6 +74,6 @@ class Pregunta : NSObject, NSCoding {
             return nil
         }
         
-        self.init(titulo: titulo, foto: foto, respuestas: respuestas)
+        self.init(titulo: titulo, imagen: imagen, categoria: categoria, respuestas: respuestas)
     }
 }
