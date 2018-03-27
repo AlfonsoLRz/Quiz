@@ -9,9 +9,15 @@
 import UIKit
 
 class HomeController: UIViewController {
-    //MARK: propiedades de la interfaz.
+    
+    //MARK: propiedades de la interfaz
     
     @IBOutlet weak var botonConfig: UIBarButtonItem!    // Botón derecho en la barra de navegación.
+    
+    // MARK: Otros atributos
+    
+    private let gestionPreguntas = GestionPreguntas()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +30,6 @@ class HomeController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
 }
 
