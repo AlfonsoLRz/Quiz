@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OLt-86-Xou">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gnm-nr-bJw">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -129,17 +130,18 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="Pr8-yE-zXD">
-                        <barButtonItem key="rightBarButtonItem" id="95X-EX-BUp"/>
+                        <barButtonItem key="rightBarButtonItem" image="ConfigBoton" id="95X-EX-BUp">
+                            <connections>
+                                <segue destination="SB3-sq-1lH" kind="presentation" identifier="GestionarPreguntas" id="BWq-uL-iyl"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="botonConfig" destination="95X-EX-BUp" id="ey2-MT-daI"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="456.52173913043481" y="118.20652173913044"/>
         </scene>
-        <!--Pregunta Table View Controller-->
+        <!--Gestión de preguntas-->
         <scene sceneID="qSh-iw-Yai">
             <objects>
                 <tableViewController id="OLt-86-Xou" customClass="PreguntaTableViewController" customModule="Quiz" customModuleProvider="target" sceneMemberID="viewController">
@@ -187,10 +189,42 @@
                             <outlet property="delegate" destination="OLt-86-Xou" id="9al-0r-ozN"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Gestión de preguntas" id="mtO-Vj-4Kf">
+                        <leftBarButtonItems>
+                            <barButtonItem title="Volver" id="uXt-Ix-N7c">
+                                <connections>
+                                    <action selector="volver:" destination="OLt-86-Xou" id="xxQ-Lo-UHI"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Hecho" id="OLV-4G-OuB">
+                                <connections>
+                                    <action selector="guardar:" destination="OLt-86-Xou" id="rxq-mn-98E"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Editar" id="WTE-7m-Qg7">
+                                <connections>
+                                    <action selector="editar:" destination="OLt-86-Xou" id="adh-Hg-M0V"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="lrw-z9-OJm">
+                                <connections>
+                                    <segue destination="i3i-hs-3Xi" kind="presentation" identifier="AñadirPregunta" id="BJ0-vi-t0L"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="botonAnadir" destination="lrw-z9-OJm" id="zIr-AJ-CaF"/>
+                        <outlet property="botonEditar" destination="WTE-7m-Qg7" id="naE-5H-y8d"/>
+                        <outlet property="botonHecho" destination="OLV-4G-OuB" id="rzn-Ls-fMJ"/>
+                        <outlet property="botonVolver" destination="uXt-Ix-N7c" id="4Ni-v8-Tij"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hgW-yc-LdQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1495.6521739130435" y="116.57608695652175"/>
+            <point key="canvasLocation" x="2572" y="117"/>
         </scene>
         <!--Crear pregunta-->
         <scene sceneID="usr-Oy-bn5">
@@ -201,7 +235,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4u-3k-vw9">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y7B-H3-k7j">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
@@ -352,7 +386,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LxF-D7-x5d"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Nueva pregunta" id="Biy-D7-sGd">
+                        <barButtonItem key="leftBarButtonItem" title="Cancelar" id="bKK-cH-bPO">
+                            <connections>
+                                <action selector="cancelar:" destination="6QZ-jc-DuH" id="mG4-Xy-cef"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Guardar" id="t88-RF-T2S">
+                            <connections>
+                                <segue destination="gAx-dr-qU6" kind="presentation" identifier="FalloPregunta" modalPresentationStyle="overCurrentContext" id="IZq-HS-bZg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="botonGuardar" destination="t88-RF-T2S" id="MZW-ha-ZLk"/>
                         <outlet property="categoriaPregunta" destination="IAY-y2-u1n" id="Ru2-Bb-8Eq"/>
                         <outlet property="imagenPregunta" destination="hdp-Ia-1LF" id="bwy-Pk-UC1"/>
                         <outlet property="respuestaCorrecta" destination="KlM-Yq-SIx" id="imE-Ca-pKq"/>
@@ -369,7 +416,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2549.275362318841" y="118.20652173913044"/>
+            <point key="canvasLocation" x="4674" y="118"/>
         </scene>
         <!--Pop Over-->
         <scene sceneID="NWI-02-FLW">
@@ -390,11 +437,14 @@
                                         <rect key="frame" x="0.0" y="94" width="320" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="OK"/>
+                                        <connections>
+                                            <action selector="eliminarPopOver:" destination="gAx-dr-qU6" eventType="touchUpInside" id="bPF-eX-Idn"/>
+                                        </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mensaje" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmf-Ye-fhH">
-                                        <rect key="frame" x="0.0" y="8" width="320" height="78"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mensaje" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmf-Ye-fhH">
+                                        <rect key="frame" x="28" y="8" width="262" height="78"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -418,10 +468,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ioI-vE-fOi"/>
                     </view>
+                    <connections>
+                        <outlet property="mensajeLabel" destination="Tmf-Ye-fhH" id="M13-Q1-X7x"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rzY-fh-72y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3382.608695652174" y="119.83695652173914"/>
+            <point key="canvasLocation" x="5785.507246376812" y="116.57608695652175"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ark-Q8-4wg">
@@ -441,8 +494,45 @@
             </objects>
             <point key="canvasLocation" x="-425" y="118"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MuY-bR-vh9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SB3-sq-1lH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2ZC-cE-BYJ">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OLt-86-Xou" kind="relationship" relationship="rootViewController" id="a7X-zp-G2p"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S0G-Bc-JqP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1495.6521739130435" y="116.57608695652175"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UhN-14-5SR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i3i-hs-3Xi" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6Sk-cI-Mjf">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="6QZ-jc-DuH" kind="relationship" relationship="rootViewController" id="B7r-0d-Pec"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rhs-kS-8HZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3620" y="117"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="ConfigBoton" width="42" height="17"/>
         <image name="HomeIcon" width="350" height="212"/>
         <image name="NoImagen" width="250" height="250"/>
     </resources>

@@ -9,11 +9,22 @@
 import UIKit
 
 class PopOverViewController: UIViewController {
+    
+    //MARK: Atributos relacionados con la interfaz
+    
+    @IBOutlet weak var mensajeLabel: UILabel!
+    
+    
+    //MARK: Atributos
+    
+    var mensaje : String?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Inicializamos el contenido del mensaje.
+        mensajeLabel.text = mensaje ?? ""
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +32,12 @@ class PopOverViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    //MARK: Actions
+    
+    @IBAction func eliminarPopOver(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 

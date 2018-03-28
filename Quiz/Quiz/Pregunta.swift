@@ -35,22 +35,31 @@ class Pregunta : NSObject, NSCoding {
     
     //MARK: Constructor
     
-    init?(titulo: String, imagen: UIImage?, categoria: String?, respuestas : [String]?) {
+    init?(titulo: String, imagen: UIImage?, categoria: String?, respuestas : [String]?, mensaje: inout String) {
+        // Comprobaciones de correción de parámetros.
+        guard !titulo.isEmpty else {
+            mensaje = "El título de la pregunta no puede estar vacío."
+            return nil
+        }
+        
+        /*guard let array = respuestas, array.count == 4 else {
+            mensaje = "El número de respuestas debe de ser 4."
+            return nil
+        }
+        
+        // Las respuestas tampoco pueden estar vacías.
+        for respuesta in respuestas! {
+            if respuesta.isEmpty {
+                mensaje = "Ninguna respuesta puede quedar vacía."
+                return nil
+            }
+        }*/
+        
         self.titulo = titulo
         self.imagen = imagen
         self.categoria = categoria
         self.respuestas = [String]()
-        
-        // Comprobamos si el vector de respuestas es correcto (tamaño y valor).
-        /*if let _ = respuestas {
-            if respuestas!.count != 4 {
-                return nil
-            } else {
-                self.respuestas = respuestas!
-            }
-        } else {
-            return nil
-        }*/
+        mensaje = ""    // No había ningún fallo.
     }
     
     //MARK: NSCoding
@@ -81,6 +90,7 @@ class Pregunta : NSObject, NSCoding {
             return nil
         }
         
-        self.init(titulo: titulo, imagen: imagen, categoria: categoria, respuestas: respuestas)
+        var mensaje = ""
+        self.init(titulo: titulo, imagen: imagen, categoria: categoria, respuestas: respuestas, mensaje: &mensaje)
     }
 }

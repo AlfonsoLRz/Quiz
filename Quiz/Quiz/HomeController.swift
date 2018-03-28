@@ -10,10 +10,6 @@ import UIKit
 
 class HomeController: UIViewController {
     
-    //MARK: propiedades de la interfaz
-    
-    @IBOutlet weak var botonConfig: UIBarButtonItem!    // Botón derecho en la barra de navegación.
-    
     // MARK: Otros atributos
     
     private let gestionPreguntas = GestionPreguntas()
@@ -21,9 +17,6 @@ class HomeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Cargamos el icono del botón derecho de la barra de navegación.
-        botonConfig.image = UIImage(named: "ConfigBoton")
     }
 
     override func didReceiveMemoryWarning() {

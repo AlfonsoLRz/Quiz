@@ -6,12 +6,17 @@
 //  Copyright © 2018 AlfonsoLR. All rights reserved.
 //
 
+import os.log
 import UIKit
 
 class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //MARK: Atributos de la interfaz
     
+    // Barra de navegación
+    @IBOutlet var botonGuardar: UIBarButtonItem!
+    
+    // Formulario
     @IBOutlet weak var tituloPregunta: UITextField!
     @IBOutlet weak var categoriaPregunta: UITextField!
     @IBOutlet weak var imagenPregunta: UIImageView!
@@ -21,10 +26,13 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
     @IBOutlet weak var respuestaFalsa3: UITextField!
     
     // Último textField presionado.
-    var ultimoTextFieldUsado : UITextField?
+    private var ultimoTextFieldUsado : UITextField?
     
     
     //MARK: Otros atributos.
+    
+    var mensajeCreacion : String?
+    var pregunta : Pregunta?
     
 
     override func viewDidLoad() {
@@ -39,15 +47,41 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
     }
     
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+        // Segue para mostrar el pop over.
+        if let popOver = segue.destination as? PopOverViewController {
+            print(mensajeCreacion!)
+            popOver.mensaje = self.mensajeCreacion ?? "Fallo al crear la pregunta."
+            
+            // Limpiamos las variables...
+            self.pregunta = nil
+            self.mensajeCreacion = nil
+        }
     }
-    */
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        // Comprobamos si se puede añadir la pregunta...
+        if identifier == "VolverLista" {
+            if let mensaje = creaPregunta() {
+                self.mensajeCreacion = mensaje
+            }
+            return self.mensajeCreacion == nil
+            
+        // Fallo al crear la pregunta. ¿Es correcto hacer esta navegación?
+        } else if identifier == "FalloPregunta" {
+            if let mensaje = creaPregunta() {
+                self.mensajeCreacion = mensaje
+            }
+            return self.mensajeCreacion != nil
+        }
+        
+        return false
+    }
+    
     
     //MARK: UIImagePickerControllerDelegate
     
@@ -69,7 +103,11 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
         dismiss(animated: true, completion: nil)
     }
 
+    
     //MARK: Actions
+    @IBAction func cancelar(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         ultimoTextFieldUsado = textField
@@ -96,5 +134,29 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
         // Nos debe informar cuando se escoge una imagen.
         imagePickerController.delegate = self
         present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    
+    //MARK: Métodos privados
+    private func creaPregunta() -> String? {
+        // Comprobamos si la pregunta está ya creada...
+        guard self.pregunta == nil else {
+            return self.mensajeCreacion
+        }
+        
+        // Creamos la pregunta...
+        let titulo = tituloPregunta.text ?? ""
+        let imagen = imagenPregunta.image
+        let categoria = categoriaPregunta.text ?? ""
+        let respuestas = [respuestaCorrecta.text ?? "", respuestaFalsa1.text ?? "", respuestaFalsa2.text ?? "", respuestaFalsa3.text ?? ""]
+        var mensaje = ""
+        
+        if let pregunta = Pregunta(titulo: titulo, imagen: imagen, categoria: categoria, respuestas: respuestas, mensaje: &mensaje) {
+            self.pregunta = pregunta
+            
+            return nil
+        }
+        
+        return mensaje
     }
 }

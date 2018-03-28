@@ -10,13 +10,32 @@ import UIKit
 
 class PreguntaTableViewController: UITableViewController {
     
+    //MARK: Atributos relacionados con la interfaz
+    
+    // Barra izquierda.
+    @IBOutlet var botonVolver: UIBarButtonItem!
+    @IBOutlet var botonHecho: UIBarButtonItem!
+    
+    // Barra derecha.
+    @IBOutlet var botonAnadir: UIBarButtonItem!
+    @IBOutlet var botonEditar: UIBarButtonItem!
+    
+    
     //MARK: Atributos
     
+    var editable = false
     var preguntas = [Pregunta]()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Mostramos sólo los botones iniciales.
+        self.navigationItem.leftBarButtonItem = nil
+        self.navigationItem.leftBarButtonItem = botonVolver
+        
+        self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.rightBarButtonItem = botonEditar
 
         cargaPreguntas()
     }
@@ -54,15 +73,11 @@ class PreguntaTableViewController: UITableViewController {
         return cell
     }
 
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+        return editable
     }
-    */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -70,9 +85,9 @@ class PreguntaTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
+
 
     /*
     // Override to support rearranging the table view.
@@ -99,17 +114,58 @@ class PreguntaTableViewController: UITableViewController {
     }
     */
     
+    @IBAction func editar(_ sender: UIBarButtonItem) {
+        // Cambiamos el botón izquierdo: ahora sólo podemos guardar y no salir.
+        self.navigationItem.leftBarButtonItem = nil
+        self.navigationItem.leftBarButtonItem = botonHecho
+        
+        // Cambiamos el botón derecho...
+        self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.rightBarButtonItem = botonAnadir
+        
+        // Ahora la tabla se puede editar.
+        editable = true
+    }
+    
+    @IBAction func guardar(_ sender: UIBarButtonItem) {
+        // Volvemos a al vista inicial, no podemos editar.
+        self.navigationItem.leftBarButtonItem = nil
+        self.navigationItem.leftBarButtonItem = botonVolver
+        
+        self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.rightBarButtonItem = botonEditar
+        
+        // Tenemos que darle al botón de editar de nuevo si queremos modificar la tabla.
+        editable = false
+    }
+    
+    @IBAction func volver(_ sender: UIBarButtonItem) {
+        // Animación para hacer desaparecer esta ventana.
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func vuelveAListaDePreguntas(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? PreguntaViewController, let pregunta = sourceViewController.pregunta {
+            // Añadimos una nueva pregunta.
+            let nuevoIndice = IndexPath(row: self.preguntas.count, section: 0)
+            self.preguntas.append(pregunta)
+            self.tableView.insertRows(at: [nuevoIndice], with: .automatic)
+        }
+    }
+
+    
     //MARK: Métodos privados
     
     private func cargaPreguntas() {
         let photo1 = UIImage(named: "DefaultImage")
         let photo2 = UIImage(named: "DefaultImage")
+        var mensaje = ""
         
-        guard let pregunta1 = Pregunta(titulo: "Hola", imagen: photo1, categoria: "Prueba", respuestas: nil) else {
+        guard let pregunta1 = Pregunta(titulo: "Hola", imagen: photo1, categoria: "Prueba", respuestas: nil, mensaje: &mensaje) else {
             fatalError("")
         }
         
-        guard let pregunta2 = Pregunta(titulo: "Prueba", imagen: photo2, categoria: "Prueba", respuestas: nil) else {
+        guard let pregunta2 = Pregunta(titulo: "Prueba", imagen: photo2, categoria: "Prueba", respuestas: nil, mensaje: &mensaje) else {
             fatalError("")
         }
         
