@@ -35,15 +35,22 @@ class Pregunta : NSObject, NSCoding {
     
     //MARK: Constructor
     
-    init?(titulo: String, imagen: UIImage?, categoria: String?, respuestas : [String]) {
+    init?(titulo: String, imagen: UIImage?, categoria: String?, respuestas : [String]?) {
         self.titulo = titulo
         self.imagen = imagen
         self.categoria = categoria
-        self.respuestas = respuestas
+        self.respuestas = [String]()
         
-        if respuestas.count != 4 {
+        // Comprobamos si el vector de respuestas es correcto (tamaño y valor).
+        /*if let _ = respuestas {
+            if respuestas!.count != 4 {
+                return nil
+            } else {
+                self.respuestas = respuestas!
+            }
+        } else {
             return nil
-        }
+        }*/
     }
     
     //MARK: NSCoding
