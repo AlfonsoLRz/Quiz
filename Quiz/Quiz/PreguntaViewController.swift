@@ -66,15 +66,11 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
             respuestaFalsa3.text = pregunta.respuestas[3]
             
             self.pregunta = nil
-        }
-        
-        // Configuramos el título de la barra de navegación.
-        let modoAñadirPregunta = presentingViewController is UINavigationController
-        
-        if modoAñadirPregunta {
-            self.navigationItem.title = "Nueva pregunta"
-        } else if let _ = navigationController {
+            
+            // Configuramos el título de la barra de navegación.
             self.navigationItem.title = "Modificar pregunta"
+        } else {
+            self.navigationItem.title = "Añadir pregunta"
         }
     }
 
@@ -132,12 +128,12 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
     }
     
     @IBAction func cancelar(_ sender: UIBarButtonItem) {
-        let modoAñadirPregunta = presentingViewController is UINavigationController
-        
-        if modoAñadirPregunta {
+        if self.navigationItem.title == "Añadir pregunta" {
             dismiss(animated: true, completion: nil)
-        } else if let owningNavigationController = navigationController {
-            owningNavigationController.popViewController(animated: true)
+        } else if self.navigationItem.title == "Modificar pregunta" {
+            if let owningViewController = self.navigationController {
+                owningViewController.popViewController(animated: true)
+            }
         } else {
             fatalError("La vista PreguntaViewController no está en ninguna controlador de navegación. ")
         }

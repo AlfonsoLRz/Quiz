@@ -89,6 +89,8 @@ class PreguntaTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Borramos la información de nuestro fuente de datos.
             self.gestionPreguntas?.eliminarPregunta(index: indexPath.row)
+            self.gestionPreguntas?.guardaPreguntas()
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -199,6 +201,9 @@ class PreguntaTableViewController: UITableViewController {
                 gestionPreguntas.añadirPreguntas(preguntas: [pregunta])
                 tableView.insertRows(at: [nuevoIndice], with: .none)
             }
+            
+            // Guardamos cambios en fichero.
+            gestionPreguntas.guardaPreguntas()
         }
     }
 

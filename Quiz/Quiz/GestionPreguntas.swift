@@ -19,7 +19,9 @@ class GestionPreguntas {
     
     init() {
         // Intentamos cargar las preguntas.
-        
+        if let preguntas = cargaPreguntas() {
+            self.preguntas += preguntas
+        }
     }
     
     //MARK: Métodos públicos

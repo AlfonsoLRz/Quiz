@@ -263,7 +263,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Añada su pregunta" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dnb-vm-2B4">
-                                                        <rect key="frame" x="88.5" y="35.5" width="143" height="30"/>
+                                                        <rect key="frame" x="0.0" y="35.5" width="320" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="78m-iu-A1g"/>
                                                         </constraints>
@@ -351,7 +351,7 @@
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Respuesta falsa" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cuh-9z-jau">
-                                                        <rect key="frame" x="0.0" y="782.5" width="320" height="30"/>
+                                                        <rect key="frame" x="98.5" y="782.5" width="123" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="2YC-hz-fqc"/>
                                                         </constraints>
@@ -531,6 +531,6 @@
         <image name="NoImagen" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Rxw-e9-uVu"/>
+        <segue reference="B7r-0d-Pec"/>
     </inferredMetricsTieBreakers>
 </document>
