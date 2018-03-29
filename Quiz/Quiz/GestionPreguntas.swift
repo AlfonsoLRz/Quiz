@@ -24,6 +24,22 @@ class GestionPreguntas {
     
     //MARK: Métodos públicos
     
+    func añadirPreguntas (preguntas: [Pregunta]) {
+        self.preguntas += preguntas
+    }
+    
+    func getNumPreguntas() -> Int {
+        return preguntas.count
+    }
+    
+    func getPregunta(index: Int) -> Pregunta? {
+        if index < preguntas.count {
+            return preguntas[index]
+        }
+        
+        return nil
+    }
+    
     func guardaPreguntas() {
         let exitoGuardado = NSKeyedArchiver.archiveRootObject(preguntas, toFile: Pregunta.ArchivoURL.path)
         

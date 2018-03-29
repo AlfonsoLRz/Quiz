@@ -13,6 +13,11 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
     
     //MARK: Atributos de la interfaz
     
+    // Pop over
+    @IBOutlet weak var popOver: UIView!
+    @IBOutlet weak var mensajePopOver: UIView!
+    @IBOutlet weak var labelPopOver: UILabel!
+    
     // Barra de navegación
     @IBOutlet var botonGuardar: UIBarButtonItem!
     
@@ -26,19 +31,42 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
     @IBOutlet weak var respuestaFalsa3: UITextField!
     
     // Último textField presionado.
+    private var imagenModificada = false
     private var ultimoTextFieldUsado : UITextField?
     
     
     //MARK: Otros atributos.
-    
-    var mensajeCreacion : String?
+
     var pregunta : Pregunta?
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // El pop over está escondido por defecto.
+        self.popOver.isHidden = true
+        self.mensajePopOver.isHidden = true
 
-        // Do any additional setup after loading the view.
+        // Recibir eventos de los text fields...
+        tituloPregunta.delegate = self
+        categoriaPregunta.delegate = self
+        respuestaCorrecta.delegate = self
+        respuestaFalsa1.delegate = self
+        respuestaFalsa2.delegate = self
+        respuestaFalsa3.delegate = self
+        
+        // Si la pregunta ya existe, es decir, es una modificación, se muestran los datos de la misma.
+        if let pregunta = self.pregunta {
+            tituloPregunta.text = pregunta.titulo
+            categoriaPregunta.text = pregunta.categoria
+            imagenPregunta.image = pregunta.imagen
+            respuestaCorrecta.text = pregunta.respuestas[0]
+            respuestaFalsa1.text = pregunta.respuestas[1]
+            respuestaFalsa2.text = pregunta.respuestas[2]
+            respuestaFalsa3.text = pregunta.respuestas[3]
+            
+            self.pregunta = nil
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,35 +79,18 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        
-        // Segue para mostrar el pop over.
-        if let popOver = segue.destination as? PopOverViewController {
-            print(mensajeCreacion!)
-            popOver.mensaje = self.mensajeCreacion ?? "Fallo al crear la pregunta."
-            
-            // Limpiamos las variables...
-            self.pregunta = nil
-            self.mensajeCreacion = nil
-        }
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        // Comprobamos si se puede añadir la pregunta...
-        if identifier == "VolverLista" {
-            if let mensaje = creaPregunta() {
-                self.mensajeCreacion = mensaje
-            }
-            return self.mensajeCreacion == nil
+        if let mensaje = creaPregunta() {
+            popOver.isHidden = false
+            mensajePopOver.isHidden = false
+            labelPopOver.text = mensaje
             
-        // Fallo al crear la pregunta. ¿Es correcto hacer esta navegación?
-        } else if identifier == "FalloPregunta" {
-            if let mensaje = creaPregunta() {
-                self.mensajeCreacion = mensaje
-            }
-            return self.mensajeCreacion != nil
+            return false
         }
         
-        return false
+        return true
     }
     
     
@@ -98,6 +109,7 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
         
         // Modificamos la imagen en la vista.
         imagenPregunta.image = imagenSleccionada
+        imagenModificada = true
         
         // Hacemos desaparecer la ventana de selección de imágenes.
         dismiss(animated: true, completion: nil)
@@ -105,8 +117,21 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
 
     
     //MARK: Actions
+    @IBAction func aceptarMensajePopOver(_ sender: UIButton) {
+        popOver.isHidden = true
+        mensajePopOver.isHidden = true
+    }
+    
     @IBAction func cancelar(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        let modoAñadirPregunta = presentingViewController is UINavigationController
+        
+        if modoAñadirPregunta {
+            dismiss(animated: true, completion: nil)
+        } else if let owningNavigationController = navigationController {
+            owningNavigationController.popViewController(animated: true)
+        } else {
+            fatalError("La vista PreguntaViewController no está en ninguna controlador de navegación. ")
+        }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -139,14 +164,9 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
     
     //MARK: Métodos privados
     private func creaPregunta() -> String? {
-        // Comprobamos si la pregunta está ya creada...
-        guard self.pregunta == nil else {
-            return self.mensajeCreacion
-        }
-        
         // Creamos la pregunta...
         let titulo = tituloPregunta.text ?? ""
-        let imagen = imagenPregunta.image
+        let imagen = ((imagenModificada) ? imagenPregunta.image : nil)
         let categoria = categoriaPregunta.text ?? ""
         let respuestas = [respuestaCorrecta.text ?? "", respuestaFalsa1.text ?? "", respuestaFalsa2.text ?? "", respuestaFalsa3.text ?? ""]
         var mensaje = ""

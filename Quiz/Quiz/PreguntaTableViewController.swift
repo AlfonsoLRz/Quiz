@@ -6,6 +6,7 @@
 //  Copyright © 2018 AlfonsoLR. All rights reserved.
 //
 
+import os.log
 import UIKit
 
 class PreguntaTableViewController: UITableViewController {
@@ -24,7 +25,7 @@ class PreguntaTableViewController: UITableViewController {
     //MARK: Atributos
     
     var editable = false
-    var preguntas = [Pregunta]()
+    var gestionPreguntas : GestionPreguntas?
     
 
     override func viewDidLoad() {
@@ -52,7 +53,11 @@ class PreguntaTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return preguntas.count
+        guard let gestionPreguntas = self.gestionPreguntas else {
+            return 0
+        }
+        
+        return gestionPreguntas.getNumPreguntas()
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,10 +69,12 @@ class PreguntaTableViewController: UITableViewController {
         }
         
         // Consigue la pregunta de la fila que necesita.
-        let pregunta = preguntas[indexPath.row]
+        guard let pregunta = gestionPreguntas!.getPregunta(index: indexPath.row) else {
+            fatalError("La pregunta que buscamos excede los índices del vector de preguntas almacenado. ")
+        }
         
         cell.preguntaLabel.text = pregunta.titulo
-        cell.imagenPregunta.image = pregunta.imagen
+        cell.imagenPregunta.image = pregunta.imagen ?? UIImage(named: "DefaultImage")
         cell.categoriaLabel.text = pregunta.categoria
 
         return cell
@@ -104,15 +111,38 @@ class PreguntaTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        switch (segue.identifier ?? "") {
+        case "AñadirPregunta":
+            os_log("Añadir una nueva comida.", log: OSLog.default, type: .debug)
+        case "ModificarPregunta":
+            guard let preguntaController = segue.destination as? PreguntaViewController else {
+                fatalError("Destino inesperado: \(segue.destination)")
+            }
+            
+            guard let celda = sender as? PreguntaTableViewCell else {
+                fatalError("Fuente de evento inesperada: \(String(describing: sender))")
+            }
+            
+            guard let indice = tableView.indexPath(for: celda) else {
+                fatalError("La celda no está siendo mostrada en la tabla. ")
+            }
+            
+            guard let gestionPreguntas = self.gestionPreguntas else {
+                fatalError("No tenemos un gestionador de preguntas. ")
+            }
+            
+            guard let preguntaSeleccionada = gestionPreguntas.getPregunta(index: indice.row) else {
+                fatalError("La pregunta seleccionada excede los límites del conjunto de preguntas almacenado. ")
+            }
+            
+            preguntaController.pregunta = preguntaSeleccionada
+        default:
+            fatalError("Identificador de navegación inesperado. ")
+        }
     }
-    */
     
     @IBAction func editar(_ sender: UIBarButtonItem) {
         // Cambiamos el botón izquierdo: ahora sólo podemos guardar y no salir.
@@ -146,9 +176,14 @@ class PreguntaTableViewController: UITableViewController {
     
     @IBAction func vuelveAListaDePreguntas(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? PreguntaViewController, let pregunta = sourceViewController.pregunta {
+            // Comprobamos que tenemos gestión de preguntas.
+            guard let gestionPreguntas = self.gestionPreguntas else {
+                fatalError("No tenemos un gestionador de preguntas. ")
+            }
+            
             // Añadimos una nueva pregunta.
-            let nuevoIndice = IndexPath(row: self.preguntas.count, section: 0)
-            self.preguntas.append(pregunta)
+            let nuevoIndice = IndexPath(row: gestionPreguntas.getNumPreguntas(), section: 0)
+            gestionPreguntas.añadirPreguntas(preguntas: [pregunta])
             self.tableView.insertRows(at: [nuevoIndice], with: .automatic)
         }
     }
@@ -157,7 +192,7 @@ class PreguntaTableViewController: UITableViewController {
     //MARK: Métodos privados
     
     private func cargaPreguntas() {
-        let photo1 = UIImage(named: "DefaultImage")
+        /*let photo1 = UIImage(named: "DefaultImage")
         let photo2 = UIImage(named: "DefaultImage")
         var mensaje = ""
         
@@ -169,7 +204,11 @@ class PreguntaTableViewController: UITableViewController {
             fatalError("")
         }
         
-        preguntas += [pregunta1, pregunta2]
+        guard let gestionPreguntas = self.gestionPreguntas else {
+            fatalError("No tenemos un gestionador de preguntas. ")
+        }
+        
+        gestionPreguntas.añadirPreguntas(preguntas: [pregunta1, pregunta2])*/
     }
 
 }

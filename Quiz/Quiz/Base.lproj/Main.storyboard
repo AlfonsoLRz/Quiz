@@ -132,7 +132,7 @@
                     <navigationItem key="navigationItem" title="Home" id="Pr8-yE-zXD">
                         <barButtonItem key="rightBarButtonItem" image="ConfigBoton" id="95X-EX-BUp">
                             <connections>
-                                <segue destination="SB3-sq-1lH" kind="presentation" identifier="GestionarPreguntas" id="BWq-uL-iyl"/>
+                                <segue destination="SB3-sq-1lH" kind="show" identifier="GestionarPreguntas" action="showDetailViewController:sender:" id="BWq-uL-iyl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -181,6 +181,7 @@
                                     <outlet property="categoriaLabel" destination="wnf-1S-mXt" id="7S4-ar-rDU"/>
                                     <outlet property="imagenPregunta" destination="FHm-ga-OXk" id="f1V-M7-vYT"/>
                                     <outlet property="preguntaLabel" destination="CeY-M1-pN9" id="ah9-wo-b3j"/>
+                                    <segue destination="6QZ-jc-DuH" kind="show" identifier="ModificarPregunta" id="Rxw-e9-uVu"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -367,22 +368,57 @@
                                             <constraint firstAttribute="height" constant="1000" id="gS1-dM-2I4"/>
                                         </constraints>
                                     </view>
+                                    <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LDZ-1r-6ZH" userLabel="PopOverView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="y7B-H3-k7j" firstAttribute="leading" secondItem="J4u-3k-vw9" secondAttribute="leading" id="3QJ-yr-i8t"/>
+                                    <constraint firstItem="LDZ-1r-6ZH" firstAttribute="leading" secondItem="J4u-3k-vw9" secondAttribute="leading" id="IV7-Dd-HbQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="LDZ-1r-6ZH" secondAttribute="bottom" id="V3M-mb-rk9"/>
+                                    <constraint firstItem="LDZ-1r-6ZH" firstAttribute="top" secondItem="J4u-3k-vw9" secondAttribute="top" id="VLJ-rO-vWm"/>
+                                    <constraint firstAttribute="trailing" secondItem="LDZ-1r-6ZH" secondAttribute="trailing" id="Z0q-gt-XhL"/>
                                     <constraint firstAttribute="trailing" secondItem="y7B-H3-k7j" secondAttribute="trailing" id="Z67-EM-QW4"/>
                                     <constraint firstAttribute="bottom" secondItem="y7B-H3-k7j" secondAttribute="bottom" id="v6O-Ie-mn6"/>
                                     <constraint firstItem="y7B-H3-k7j" firstAttribute="top" secondItem="J4u-3k-vw9" secondAttribute="top" id="zwh-cL-CSD"/>
                                 </constraints>
                             </scrollView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3a-Al-ctj" userLabel="MensajePopOver">
+                                <rect key="frame" x="57" y="302" width="300" height="132"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyW-Dp-GVa">
+                                        <rect key="frame" x="8" y="94" width="284" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="OK"/>
+                                        <connections>
+                                            <action selector="aceptarMensajePopOver:" destination="6QZ-jc-DuH" eventType="touchUpInside" id="92I-dv-g5R"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mensaje" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmf-Ye-fhH">
+                                        <rect key="frame" x="8" y="8" width="284" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="132" id="81L-hB-34J"/>
+                                    <constraint firstAttribute="width" constant="300" id="8nb-hG-tO6"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="J4u-3k-vw9" firstAttribute="top" secondItem="LxF-D7-x5d" secondAttribute="top" id="3W3-w7-jij"/>
+                            <constraint firstItem="p3a-Al-ctj" firstAttribute="centerY" secondItem="wJt-yN-66C" secondAttribute="centerY" id="Ep1-Kg-WR7"/>
                             <constraint firstItem="J4u-3k-vw9" firstAttribute="leading" secondItem="LxF-D7-x5d" secondAttribute="leading" id="HAm-KL-0iB"/>
                             <constraint firstItem="y7B-H3-k7j" firstAttribute="width" secondItem="wJt-yN-66C" secondAttribute="width" id="KTV-If-VqF"/>
                             <constraint firstItem="J4u-3k-vw9" firstAttribute="bottom" secondItem="LxF-D7-x5d" secondAttribute="bottom" id="XWq-qT-Cr3"/>
                             <constraint firstItem="J4u-3k-vw9" firstAttribute="trailing" secondItem="LxF-D7-x5d" secondAttribute="trailing" id="eDq-eq-v1X"/>
+                            <constraint firstItem="p3a-Al-ctj" firstAttribute="centerX" secondItem="wJt-yN-66C" secondAttribute="centerX" id="fKz-jw-ZtR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LxF-D7-x5d"/>
                     </view>
@@ -394,7 +430,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Guardar" id="t88-RF-T2S">
                             <connections>
-                                <segue destination="gAx-dr-qU6" kind="presentation" identifier="FalloPregunta" modalPresentationStyle="overCurrentContext" id="IZq-HS-bZg"/>
+                                <segue destination="7bY-NS-im4" kind="unwind" unwindAction="vuelveAListaDePreguntasWithSender:" id="RVo-YR-jn6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -402,6 +438,9 @@
                         <outlet property="botonGuardar" destination="t88-RF-T2S" id="MZW-ha-ZLk"/>
                         <outlet property="categoriaPregunta" destination="IAY-y2-u1n" id="Ru2-Bb-8Eq"/>
                         <outlet property="imagenPregunta" destination="hdp-Ia-1LF" id="bwy-Pk-UC1"/>
+                        <outlet property="labelPopOver" destination="Tmf-Ye-fhH" id="wCR-lH-3uh"/>
+                        <outlet property="mensajePopOver" destination="p3a-Al-ctj" id="Qvb-iG-5Dx"/>
+                        <outlet property="popOver" destination="LDZ-1r-6ZH" id="le3-Kz-bek"/>
                         <outlet property="respuestaCorrecta" destination="KlM-Yq-SIx" id="imE-Ca-pKq"/>
                         <outlet property="respuestaFalsa1" destination="Ltw-Zk-SPt" id="1df-3i-l8U"/>
                         <outlet property="respuestaFalsa2" destination="cuh-9z-jau" id="W8U-YO-pIZ"/>
@@ -410,71 +449,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6pb-yR-VwK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="7bY-NS-im4" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="98n-2b-poc">
                     <connections>
                         <action selector="seleccionaImagenDeLibreria:" destination="6QZ-jc-DuH" id="UOx-3g-7Hn"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4674" y="118"/>
-        </scene>
-        <!--Pop Over-->
-        <scene sceneID="NWI-02-FLW">
-            <objects>
-                <viewController id="gAx-dr-qU6" userLabel="Pop Over" customClass="PopOverViewController" customModule="Quiz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HL8-PP-Xc4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LDZ-1r-6ZH">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3a-Al-ctj">
-                                <rect key="frame" x="47" y="302" width="320" height="132"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyW-Dp-GVa">
-                                        <rect key="frame" x="0.0" y="94" width="320" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="OK"/>
-                                        <connections>
-                                            <action selector="eliminarPopOver:" destination="gAx-dr-qU6" eventType="touchUpInside" id="bPF-eX-Idn"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mensaje" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmf-Ye-fhH">
-                                        <rect key="frame" x="28" y="8" width="262" height="78"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="132" id="81L-hB-34J"/>
-                                    <constraint firstAttribute="width" constant="320" id="oNH-E6-deD"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="LDZ-1r-6ZH" firstAttribute="leading" secondItem="ioI-vE-fOi" secondAttribute="leading" id="41q-5Q-pt6"/>
-                            <constraint firstItem="LDZ-1r-6ZH" firstAttribute="top" secondItem="HL8-PP-Xc4" secondAttribute="topMargin" id="Jrw-td-Xg3"/>
-                            <constraint firstItem="p3a-Al-ctj" firstAttribute="centerY" secondItem="HL8-PP-Xc4" secondAttribute="centerY" id="NO6-XX-kUv"/>
-                            <constraint firstItem="LDZ-1r-6ZH" firstAttribute="width" secondItem="HL8-PP-Xc4" secondAttribute="width" id="beW-af-nXa"/>
-                            <constraint firstItem="LDZ-1r-6ZH" firstAttribute="bottom" secondItem="ioI-vE-fOi" secondAttribute="bottom" id="el1-JD-GZT"/>
-                            <constraint firstItem="LDZ-1r-6ZH" firstAttribute="trailing" secondItem="ioI-vE-fOi" secondAttribute="trailing" id="rvl-7W-UyL"/>
-                            <constraint firstItem="p3a-Al-ctj" firstAttribute="centerX" secondItem="HL8-PP-Xc4" secondAttribute="centerX" id="ybO-Si-k8G"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="ioI-vE-fOi"/>
-                    </view>
-                    <connections>
-                        <outlet property="mensajeLabel" destination="Tmf-Ye-fhH" id="M13-Q1-X7x"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rzY-fh-72y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5785.507246376812" y="116.57608695652175"/>
+            <point key="canvasLocation" x="4673.913043478261" y="117.39130434782609"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ark-Q8-4wg">
@@ -494,10 +476,11 @@
             </objects>
             <point key="canvasLocation" x="-425" y="118"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Gestionar Preguntas View Controller-->
         <scene sceneID="MuY-bR-vh9">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SB3-sq-1lH" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S0G-Bc-JqP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SB3-sq-1lH" customClass="GestionarPreguntasViewController" customModule="Quiz" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2ZC-cE-BYJ">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
@@ -508,7 +491,6 @@
                         <segue destination="OLt-86-Xou" kind="relationship" relationship="rootViewController" id="a7X-zp-G2p"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S0G-Bc-JqP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1495.6521739130435" y="116.57608695652175"/>
         </scene>
@@ -528,7 +510,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rhs-kS-8HZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3620" y="117"/>
+            <point key="canvasLocation" x="3613" y="596"/>
         </scene>
     </scenes>
     <resources>
@@ -536,4 +518,7 @@
         <image name="HomeIcon" width="350" height="212"/>
         <image name="NoImagen" width="250" height="250"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Rxw-e9-uVu"/>
+    </inferredMetricsTieBreakers>
 </document>

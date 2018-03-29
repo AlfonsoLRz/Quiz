@@ -23,6 +23,24 @@ class HomeController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+    
+        switch (segue.identifier ?? "") {
+        case "GestionarPreguntas":
+            let destinationNavigation = segue.destination as? UINavigationController
+            guard let gestionarPreguntasController = destinationNavigation?.topViewController as? PreguntaTableViewController else {
+                fatalError("Destino de navegación inesperado: \(segue.destination)")
+            }
+            
+            gestionarPreguntasController.gestionPreguntas = self.gestionPreguntas
+        default:
+            fatalError("Identificador de navegación desconocido. ")
+        }
+    }
 }
 
