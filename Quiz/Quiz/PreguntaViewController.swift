@@ -59,13 +59,22 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
         if let pregunta = self.pregunta {
             tituloPregunta.text = pregunta.titulo
             categoriaPregunta.text = pregunta.categoria
-            imagenPregunta.image = pregunta.imagen
+            imagenPregunta.image = pregunta.imagen ?? UIImage(named: "NoImagen")
             respuestaCorrecta.text = pregunta.respuestas[0]
             respuestaFalsa1.text = pregunta.respuestas[1]
             respuestaFalsa2.text = pregunta.respuestas[2]
             respuestaFalsa3.text = pregunta.respuestas[3]
             
             self.pregunta = nil
+        }
+        
+        // Configuramos el título de la barra de navegación.
+        let modoAñadirPregunta = presentingViewController is UINavigationController
+        
+        if modoAñadirPregunta {
+            self.navigationItem.title = "Nueva pregunta"
+        } else if let _ = navigationController {
+            self.navigationItem.title = "Modificar pregunta"
         }
     }
 

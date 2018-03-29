@@ -28,6 +28,10 @@ class GestionPreguntas {
         self.preguntas += preguntas
     }
     
+    func eliminarPregunta (index: Int) {
+        self.preguntas.remove(at: index)
+    }
+    
     func getNumPreguntas() -> Int {
         return preguntas.count
     }
@@ -48,6 +52,10 @@ class GestionPreguntas {
         } else {
             os_log("Fallo al guardar las preguntas.", log: OSLog.default, type: .error)
         }
+    }
+    
+    func modificarPregunta(pregunta: Pregunta, index: Int) {
+        self.preguntas[index] = pregunta
     }
     
     //MARK: Métodos privados

@@ -85,10 +85,10 @@ class PreguntaTableViewController: UITableViewController {
         return editable
     }
 
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            // Borramos la información de nuestro fuente de datos.
+            self.gestionPreguntas?.eliminarPregunta(index: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -144,6 +144,13 @@ class PreguntaTableViewController: UITableViewController {
         }
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return editable
+    }
+    
+    
+    //MARK: Actions
+    
     @IBAction func editar(_ sender: UIBarButtonItem) {
         // Cambiamos el botón izquierdo: ahora sólo podemos guardar y no salir.
         self.navigationItem.leftBarButtonItem = nil
@@ -181,10 +188,17 @@ class PreguntaTableViewController: UITableViewController {
                 fatalError("No tenemos un gestionador de preguntas. ")
             }
             
-            // Añadimos una nueva pregunta.
-            let nuevoIndice = IndexPath(row: gestionPreguntas.getNumPreguntas(), section: 0)
-            gestionPreguntas.añadirPreguntas(preguntas: [pregunta])
-            self.tableView.insertRows(at: [nuevoIndice], with: .automatic)
+            // Actualización de comida.
+            if let indiceSeleccionado = tableView.indexPathForSelectedRow {
+                gestionPreguntas.modificarPregunta(pregunta: pregunta, index: indiceSeleccionado.row)
+                tableView.reloadRows(at: [indiceSeleccionado], with: .none)
+            // Añadimos una nueva comida.
+            } else {
+                let nuevoIndice = IndexPath(row: gestionPreguntas.getNumPreguntas(), section: 0)
+                
+                gestionPreguntas.añadirPreguntas(preguntas: [pregunta])
+                tableView.insertRows(at: [nuevoIndice], with: .none)
+            }
         }
     }
 

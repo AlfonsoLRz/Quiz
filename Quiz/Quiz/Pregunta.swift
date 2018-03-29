@@ -42,7 +42,7 @@ class Pregunta : NSObject, NSCoding {
             return nil
         }
         
-        /*guard let array = respuestas, array.count == 4 else {
+        guard let array = respuestas, array.count == 4 else {
             mensaje = "El número de respuestas debe de ser 4."
             return nil
         }
@@ -53,12 +53,12 @@ class Pregunta : NSObject, NSCoding {
                 mensaje = "Ninguna respuesta puede quedar vacía."
                 return nil
             }
-        }*/
+        }
         
         self.titulo = titulo
         self.imagen = imagen
         self.categoria = categoria
-        self.respuestas = [String]()
+        self.respuestas = respuestas!
         mensaje = ""    // No había ningún fallo.
     }
     
