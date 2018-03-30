@@ -35,6 +35,11 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Comprobamos que tenemos un gestor de preguntas.
+        guard let _ = self.gestionPreguntas else {
+            fatalError("La vista PreguntaTableViewController no presenta un gestor de preguntas adecuado.")
+        }
+        
         // Mostramos sólo los botones iniciales.
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.leftBarButtonItem = botonVolver
@@ -58,9 +63,9 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
+    
+    
     // MARK: Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -68,14 +73,10 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let gestionPreguntas = self.gestionPreguntas else {
-            fatalError("No existe un gestor de preguntas adecuado. ")
-        }
-        
         if estaFiltrando() {
             return self.preguntasFiltradas.count
         } else {
-            return gestionPreguntas.getNumPreguntas()
+            return self.gestionPreguntas!.getNumPreguntas()
         }
     }
 
@@ -87,10 +88,6 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
             fatalError("La celda de la cola no es una instancia de PreguntaTableViewCell.")
         }
         
-        guard let gestionPreguntas = self.gestionPreguntas else {
-            fatalError("No tenemos un gestor de preguntas. ")
-        }
-        
         // Consigue la pregunta de la fila que necesita.
         let pregunta : Pregunta
         if estaFiltrando() {
@@ -100,11 +97,11 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
             
             pregunta = self.preguntasFiltradas[indexPath.row]
         } else {
-            guard indexPath.row < gestionPreguntas.getNumPreguntas() else {
+            guard indexPath.row < self.gestionPreguntas!.getNumPreguntas() else {
                 fatalError("Índice fuera de los límites del vector preguntas.")
             }
             
-            pregunta = gestionPreguntas.getPregunta(index: indexPath.row)!
+            pregunta = self.gestionPreguntas!.getPregunta(index: indexPath.row)!
         }
         
         cell.preguntaLabel.text = pregunta.titulo
@@ -114,29 +111,25 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
         return cell
     }
 
-    // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return editable
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let gestionPreguntas = self.gestionPreguntas else {
-                fatalError("No tenemos un gestor de preguntas. ")
-            }
-            
             if estaFiltrando() {
-                if let index = gestionPreguntas.indiceDePregunta(pregunta: self.preguntasFiltradas[indexPath.row]) {
-                    gestionPreguntas.eliminarPregunta(index: index)
+                // Desconocemos el índice en el vector original, sólo sabemos el índice en preguntasFiltradas.
+                if let index = self.gestionPreguntas!.indiceDePregunta(pregunta: self.preguntasFiltradas[indexPath.row]) {
+                    self.gestionPreguntas!.eliminarPregunta(index: index)
                 }
+                
+                self.preguntasFiltradas.remove(at: indexPath.row)
             } else {
-                gestionPreguntas.eliminarPregunta(index: indexPath.row)
+                self.gestionPreguntas!.eliminarPregunta(index: indexPath.row)
             }
             
-            gestionPreguntas.guardaPreguntas()
+            self.gestionPreguntas!.guardaPreguntas()
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
 
@@ -175,15 +168,11 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
                 fatalError("La celda no está siendo mostrada en la tabla. ")
             }
             
-            guard let gestionPreguntas = self.gestionPreguntas else {
-                fatalError("No tenemos un gestor de preguntas. ")
-            }
-            
             let preguntaSeleccionada : Pregunta
             if estaFiltrando() {
                 preguntaSeleccionada = self.preguntasFiltradas[indice.row]
             } else {
-                preguntaSeleccionada = gestionPreguntas.getPregunta(index: indice.row)!
+                preguntaSeleccionada = self.gestionPreguntas!.getPregunta(index: indice.row)!
             }
             
             preguntaController.pregunta = preguntaSeleccionada
@@ -195,6 +184,7 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         return editable
     }
+    
     
     //MARK: UISearchResultsUpdating
     
@@ -209,8 +199,6 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
         } else {
             fatalError("Categoría de búsqueda desconocida: \(scope)")
         }
-        
-        print(self.preguntasFiltradas.count)
         
         tableView.reloadData()
     }
@@ -250,43 +238,40 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
     
     @IBAction func vuelveAListaDePreguntas(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? PreguntaViewController, let pregunta = sourceViewController.pregunta {
-            // Comprobamos que tenemos gestión de preguntas.
-            guard let gestionPreguntas = self.gestionPreguntas else {
-                fatalError("No tenemos un gestor de preguntas. ")
-            }
             
             // Actualización de comida.
             if let indiceSeleccionado = tableView.indexPathForSelectedRow {
                 var eliminaFila = false
                 
                 if estaFiltrando() {
-                    if let index = gestionPreguntas.indiceDePregunta(pregunta: self.preguntasFiltradas[indiceSeleccionado.row]) {
-                        gestionPreguntas.modificarPregunta(pregunta: pregunta, index: index)
+                    if let index = self.gestionPreguntas!.indiceDePregunta(pregunta: self.preguntasFiltradas[indiceSeleccionado.row]) {
+                        self.gestionPreguntas!.modificarPregunta(pregunta: pregunta, index: index)
                         
-                        if !gestionPreguntas.preguntaEncajaEnBusqueda(pregunta: pregunta, busqueda: searchController.searchBar.text!, campo: searchController.searchBar.scopeButtonTitles![searchController.searchBar.selectedScopeButtonIndex]) {
+                        if !self.gestionPreguntas!.preguntaEncajaEnBusqueda(pregunta: pregunta, busqueda: searchController.searchBar.text!, campo: searchController.searchBar.scopeButtonTitles![searchController.searchBar.selectedScopeButtonIndex]) {
                             self.preguntasFiltradas.remove(at: indiceSeleccionado.row)
                             eliminaFila = true
                         }
                     }
                 } else {
-                    gestionPreguntas.modificarPregunta(pregunta: pregunta, index: indiceSeleccionado.row)
+                    self.gestionPreguntas!.modificarPregunta(pregunta: pregunta, index: indiceSeleccionado.row)
                 }
                 
                 if !eliminaFila {
                     tableView.reloadRows(at: [indiceSeleccionado], with: .none)
                 }
+                
             // Añadimos una nueva comida.
             } else {
                 var nuevoIndice : IndexPath?
                 
-                if estaFiltrando() && gestionPreguntas.preguntaEncajaEnBusqueda(pregunta: pregunta, busqueda: searchController.searchBar.text!, campo: searchController.searchBar.scopeButtonTitles![searchController.searchBar.selectedScopeButtonIndex]) {
+                if estaFiltrando() && self.gestionPreguntas!.preguntaEncajaEnBusqueda(pregunta: pregunta, busqueda: searchController.searchBar.text!, campo: searchController.searchBar.scopeButtonTitles![searchController.searchBar.selectedScopeButtonIndex]) {
                     nuevoIndice = IndexPath(row: preguntasFiltradas.count, section: 0)
                     preguntasFiltradas.append(pregunta)
                 } else if !estaFiltrando() {
-                    nuevoIndice = IndexPath(row: gestionPreguntas.getNumPreguntas(), section: 0)
+                    nuevoIndice = IndexPath(row: self.gestionPreguntas!.getNumPreguntas(), section: 0)
                 }
                 
-                gestionPreguntas.añadirPreguntas(preguntas: [pregunta])
+                self.gestionPreguntas!.añadirPreguntas(preguntas: [pregunta])
                 
                 if let indice = nuevoIndice {
                     tableView.insertRows(at: [indice], with: .automatic)
@@ -294,7 +279,7 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
             }
             
             // Guardamos cambios en fichero.
-            gestionPreguntas.guardaPreguntas()
+            self.gestionPreguntas!.guardaPreguntas()
         }
     }
 

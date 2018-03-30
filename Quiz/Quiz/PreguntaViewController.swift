@@ -30,7 +30,7 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
     @IBOutlet weak var respuestaFalsa2: UITextField!
     @IBOutlet weak var respuestaFalsa3: UITextField!
     
-    // Último textField presionado.
+    // Modificaciones de componentes.
     private var imagenModificada = false
     private var ultimoTextFieldUsado : UITextField?
     
@@ -76,17 +76,17 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
-    // MARK: - Navigation
+    // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        // Si el mensaje no es nulo la creación de pregunta no ha tenido éxito.
         if let mensaje = creaPregunta() {
             popOver.isHidden = false
             mensajePopOver.isHidden = false
@@ -122,6 +122,7 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
 
     
     //MARK: Actions
+    
     @IBAction func aceptarMensajePopOver(_ sender: UIButton) {
         popOver.isHidden = true
         mensajePopOver.isHidden = true

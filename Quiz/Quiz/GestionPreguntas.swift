@@ -15,6 +15,7 @@ class GestionPreguntas {
     
     private var preguntas = [Pregunta]()
     
+    
     //MARK: Constructor
     
     init() {
@@ -23,6 +24,7 @@ class GestionPreguntas {
             self.preguntas += preguntas
         }
     }
+    
     
     //MARK: Métodos públicos
     
@@ -35,7 +37,6 @@ class GestionPreguntas {
     }
     
     func filtrarPorNombre(nombre: String) -> [Pregunta] {
-        print("Filtar por nombre: \(nombre)")
         return preguntas.filter({(pregunta: Pregunta) -> Bool in return
             pregunta.titulo.lowercased().contains(nombre.lowercased())
         })
@@ -82,6 +83,7 @@ class GestionPreguntas {
         
         return cadena.lowercased().contains(busqueda.lowercased())
     }
+    
     
     //MARK: Métodos privados
     

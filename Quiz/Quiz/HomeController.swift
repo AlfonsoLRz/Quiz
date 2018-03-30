@@ -10,7 +10,7 @@ import UIKit
 
 class HomeController: UIViewController {
     
-    // MARK: Otros atributos
+    // MARK: Atributos
     
     private let gestionPreguntas = GestionPreguntas()
     
@@ -25,7 +25,7 @@ class HomeController: UIViewController {
     }
     
     
-    // MARK: - Navigation
+    // MARK: Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)

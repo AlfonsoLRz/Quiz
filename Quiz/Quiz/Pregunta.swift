@@ -35,20 +35,20 @@ class Pregunta : NSObject, NSCoding {
     
     //MARK: Constructor
     
-    init?(titulo: String, imagen: UIImage?, categoria: String?, respuestas : [String]?, mensaje: inout String) {
+    init?(titulo: String, imagen: UIImage?, categoria: String?, respuestas : [String], mensaje: inout String) {
         // Comprobaciones de correción de parámetros.
         guard !titulo.isEmpty else {
             mensaje = "El título de la pregunta no puede estar vacío."
             return nil
         }
         
-        guard let array = respuestas, array.count == 4 else {
+        guard respuestas.count == 4 else {
             mensaje = "El número de respuestas debe de ser 4."
             return nil
         }
         
         // Las respuestas tampoco pueden estar vacías.
-        for respuesta in respuestas! {
+        for respuesta in respuestas {
             if respuesta.isEmpty {
                 mensaje = "Ninguna respuesta puede quedar vacía."
                 return nil
@@ -58,7 +58,7 @@ class Pregunta : NSObject, NSCoding {
         self.titulo = titulo
         self.imagen = imagen
         self.categoria = categoria
-        self.respuestas = respuestas!
+        self.respuestas = respuestas
         mensaje = ""    // No había ningún fallo.
     }
     
