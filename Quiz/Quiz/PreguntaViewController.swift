@@ -65,6 +65,7 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
             respuestaFalsa2.text = pregunta.respuestas[2]
             respuestaFalsa3.text = pregunta.respuestas[3]
             
+            self.imagenModificada = pregunta.imagen != nil
             self.pregunta = nil
             
             // Configuramos el título de la barra de navegación.
