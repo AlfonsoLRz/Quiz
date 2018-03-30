@@ -26,12 +26,25 @@ class GestionPreguntas {
     
     //MARK: Métodos públicos
     
-    func añadirPreguntas (preguntas: [Pregunta]) {
+    func añadirPreguntas(preguntas: [Pregunta]) {
         self.preguntas += preguntas
     }
     
-    func eliminarPregunta (index: Int) {
+    func eliminarPregunta(index: Int) {
         self.preguntas.remove(at: index)
+    }
+    
+    func filtrarPorNombre(nombre: String) -> [Pregunta] {
+        print("Filtar por nombre: \(nombre)")
+        return preguntas.filter({(pregunta: Pregunta) -> Bool in return
+            pregunta.titulo.lowercased().contains(nombre.lowercased())
+        })
+    }
+    
+    func filtrarPorCategoria(categoria: String) -> [Pregunta] {
+        return preguntas.filter({(pregunta: Pregunta) -> Bool in return
+            pregunta.categoria?.lowercased().contains(categoria.lowercased()) ?? false
+        })
     }
     
     func getNumPreguntas() -> Int {
@@ -56,8 +69,18 @@ class GestionPreguntas {
         }
     }
     
+    func indiceDePregunta(pregunta: Pregunta) -> Int? {
+        return self.preguntas.index(of: pregunta)
+    }
+    
     func modificarPregunta(pregunta: Pregunta, index: Int) {
         self.preguntas[index] = pregunta
+    }
+    
+    func preguntaEncajaEnBusqueda(pregunta: Pregunta, busqueda: String, campo: String) -> Bool {
+        let cadena = (campo == "Título") ? pregunta.titulo : pregunta.categoria ?? ""
+        
+        return cadena.lowercased().contains(busqueda.lowercased())
     }
     
     //MARK: Métodos privados
