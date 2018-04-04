@@ -55,6 +55,13 @@ class Pregunta : NSObject, NSCoding {
             }
         }
         
+        if let valorCategoria = categoria {
+            if valorCategoria == "Todas" {
+                mensaje = "Esta categoría está reservada para seleccionar todas las preguntas."
+                return nil
+            }
+        }
+        
         self.titulo = titulo
         self.imagen = imagen
         self.categoria = categoria

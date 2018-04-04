@@ -13,6 +13,7 @@ class GestionPreguntas {
     
     //MARK: Atributos
     
+    private var categorias = Set<String>()
     private var preguntas = [Pregunta]()
     
     
@@ -22,6 +23,7 @@ class GestionPreguntas {
         // Intentamos cargar las preguntas.
         if let preguntas = cargaPreguntas() {
             self.preguntas += preguntas
+            self.categorias = self.getCategorías()
         }
     }
     
@@ -30,10 +32,12 @@ class GestionPreguntas {
     
     func añadirPreguntas(preguntas: [Pregunta]) {
         self.preguntas += preguntas
+        self.categorias = self.getCategorías()
     }
     
     func eliminarPregunta(index: Int) {
         self.preguntas.remove(at: index)
+        self.categorias = self.getCategorías()
     }
     
     func filtrarPorNombre(nombre: String) -> [Pregunta] {
@@ -46,6 +50,15 @@ class GestionPreguntas {
         return preguntas.filter({(pregunta: Pregunta) -> Bool in return
             pregunta.categoria?.lowercased().contains(categoria.lowercased()) ?? false
         })
+    }
+    
+    func getCategoria(index: Int) -> String {
+        let array = Array(self.categorias)
+        return array[index]
+    }
+    
+    func getNumCategorias() -> Int {
+        return self.categorias.count
     }
     
     func getNumPreguntas() -> Int {
@@ -76,6 +89,7 @@ class GestionPreguntas {
     
     func modificarPregunta(pregunta: Pregunta, index: Int) {
         self.preguntas[index] = pregunta
+        self.categorias = self.getCategorías()
     }
     
     func preguntaEncajaEnBusqueda(pregunta: Pregunta, busqueda: String, campo: String) -> Bool {
@@ -89,6 +103,20 @@ class GestionPreguntas {
     
     private func cargaPreguntas() -> [Pregunta]? {
         return NSKeyedUnarchiver.unarchiveObject(withFile: Pregunta.ArchivoURL.path) as? [Pregunta]
+    }
+    
+    private func getCategorías() -> Set<String> {
+        // Dado que las categorías se pueden repetir las guardamos en un diccionario.
+        // Por defecto la única categoría será Todas.
+        var categorias : Set = ["Todas"]
+        
+        for  pregunta in self.preguntas {
+            if let categoria = pregunta.categoria {
+                categorias.insert(categoria)
+            }
+        }
+        
+        return categorias
     }
 
 }

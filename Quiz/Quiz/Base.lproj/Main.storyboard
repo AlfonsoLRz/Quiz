@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SAJ-BD-b9Z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gnm-nr-bJw">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -82,6 +82,9 @@
                                                                         <real key="value" value="5"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <segue destination="fDc-lb-Ypw" kind="presentation" identifier="SeleccionarCategoría" id="OUz-e2-UJo"/>
+                                                                </connections>
                                                             </button>
                                                             <button clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDT-rY-Jfv" customClass="RoundedButton" customModule="Quiz" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="70" width="200" height="40"/>
@@ -508,44 +511,89 @@
         <!--Seleccionar categoría-->
         <scene sceneID="idw-Nz-9bm">
             <objects>
-                <viewController id="SAJ-BD-b9Z" userLabel="Seleccionar categoría" sceneMemberID="viewController">
+                <viewController id="SAJ-BD-b9Z" userLabel="Seleccionar categoría" customClass="ElegirCategoriaViewController" customModule="Quiz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WvY-Td-NZ5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYg-BX-2eD">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WwE-J2-Rnb">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YEl-Aq-tB2">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nMM-Vs-hTl">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                        <subviews>
+                                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="cZh-z7-rmo">
+                                                <rect key="frame" x="8" y="28" width="398" height="360"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seleccione una categoría" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Tf-yx-qRq">
+                                                        <rect key="frame" x="84.000000000000014" y="0.0" width="230.33333333333337" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7fx-RU-Du3">
+                                                        <rect key="frame" x="39" y="64" width="320" height="216"/>
+                                                    </pickerView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhu-8m-G7d" customClass="RoundedButton" customModule="Quiz" customModuleProvider="target">
+                                                        <rect key="frame" x="99" y="320" width="200" height="40"/>
+                                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="9Sz-WU-i48"/>
+                                                            <constraint firstAttribute="height" constant="40" id="iy6-Xp-n0H"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                                        <state key="normal" title="Comenzar Partida">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="716" id="yot-cs-aFH"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="cZh-z7-rmo" secondAttribute="trailing" id="0hl-8b-awe"/>
+                                            <constraint firstItem="cZh-z7-rmo" firstAttribute="leading" secondItem="nMM-Vs-hTl" secondAttribute="leadingMargin" id="7pG-8y-Xpt"/>
+                                            <constraint firstItem="cZh-z7-rmo" firstAttribute="top" secondItem="nMM-Vs-hTl" secondAttribute="topMargin" constant="20" id="Ecr-Y0-SWG"/>
+                                            <constraint firstAttribute="height" constant="736" id="vBI-VA-BAe"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="YEl-Aq-tB2" secondAttribute="trailing" id="JBD-5v-QZh"/>
-                                    <constraint firstAttribute="bottom" secondItem="YEl-Aq-tB2" secondAttribute="bottom" id="YIJ-mQ-TjY"/>
-                                    <constraint firstItem="YEl-Aq-tB2" firstAttribute="top" secondItem="DYg-BX-2eD" secondAttribute="top" id="gwr-xJ-aFE"/>
-                                    <constraint firstItem="YEl-Aq-tB2" firstAttribute="leading" secondItem="DYg-BX-2eD" secondAttribute="leading" id="rdf-pd-bKu"/>
+                                    <constraint firstItem="nMM-Vs-hTl" firstAttribute="leading" secondItem="WwE-J2-Rnb" secondAttribute="leading" id="4MP-g5-bwY"/>
+                                    <constraint firstAttribute="bottom" secondItem="nMM-Vs-hTl" secondAttribute="bottom" id="cC6-fL-jl6"/>
+                                    <constraint firstItem="nMM-Vs-hTl" firstAttribute="top" secondItem="WwE-J2-Rnb" secondAttribute="top" id="dXC-jg-OfA"/>
+                                    <constraint firstAttribute="trailing" secondItem="nMM-Vs-hTl" secondAttribute="trailing" id="xGp-KN-DvX"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="DYg-BX-2eD" firstAttribute="trailing" secondItem="x80-W1-nga" secondAttribute="trailing" id="Du8-QK-SKa"/>
-                            <constraint firstItem="DYg-BX-2eD" firstAttribute="top" secondItem="x80-W1-nga" secondAttribute="top" id="RDS-11-YLw"/>
-                            <constraint firstItem="DYg-BX-2eD" firstAttribute="bottom" secondItem="x80-W1-nga" secondAttribute="bottom" id="iLZ-Kw-i7a"/>
-                            <constraint firstItem="DYg-BX-2eD" firstAttribute="leading" secondItem="x80-W1-nga" secondAttribute="leading" id="m5c-Op-BRm"/>
-                            <constraint firstItem="YEl-Aq-tB2" firstAttribute="width" secondItem="WvY-Td-NZ5" secondAttribute="width" id="n7g-sL-Ge7"/>
+                            <constraint firstItem="WwE-J2-Rnb" firstAttribute="top" secondItem="WvY-Td-NZ5" secondAttribute="top" id="AaE-0c-bGw"/>
+                            <constraint firstItem="nMM-Vs-hTl" firstAttribute="width" secondItem="WvY-Td-NZ5" secondAttribute="width" id="Dm7-64-kJZ"/>
+                            <constraint firstItem="WwE-J2-Rnb" firstAttribute="leading" secondItem="x80-W1-nga" secondAttribute="leading" id="EZq-SB-vDJ"/>
+                            <constraint firstItem="WwE-J2-Rnb" firstAttribute="bottom" secondItem="x80-W1-nga" secondAttribute="bottom" id="FE2-f6-CwQ"/>
+                            <constraint firstItem="WwE-J2-Rnb" firstAttribute="trailing" secondItem="x80-W1-nga" secondAttribute="trailing" id="MYQ-3P-2sw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="x80-W1-nga"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Elegir categoría" id="gZq-VS-M6Y">
+                        <barButtonItem key="leftBarButtonItem" title="Volver" id="Wve-ph-UWw"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="seleccionCategoria" destination="7fx-RU-Du3" id="m5M-dM-HeY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hY5-cm-kJo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-462.31884057971018" y="1553.804347826087"/>
+            <point key="canvasLocation" x="-426" y="1846"/>
         </scene>
         <!--Gestionar Preguntas View Controller-->
         <scene sceneID="MuY-bR-vh9">
@@ -581,7 +629,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rhs-kS-8HZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3613" y="596"/>
+            <point key="canvasLocation" x="3918.8405797101454" y="595.92391304347825"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="GVu-2A-DDf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fDc-lb-Ypw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Sbs-Zg-9d2">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="SAJ-BD-b9Z" kind="relationship" relationship="rootViewController" id="QEZ-Mi-Zcb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3gN-J3-4yQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-426.08695652173918" y="1007.608695652174"/>
         </scene>
     </scenes>
     <resources>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CBB2AE52074F0D000CD6176 /* ElegirCategoriaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBB2AE42074F0D000CD6176 /* ElegirCategoriaViewController.swift */; };
 		4C00AD11206927ED00E17D68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00AD10206927ED00E17D68 /* AppDelegate.swift */; };
 		4C00AD13206927ED00E17D68 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00AD12206927ED00E17D68 /* HomeController.swift */; };
 		4C00AD16206927ED00E17D68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C00AD14206927ED00E17D68 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0CBB2AE42074F0D000CD6176 /* ElegirCategoriaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElegirCategoriaViewController.swift; sourceTree = "<group>"; };
 		4C00AD0D206927ED00E17D68 /* Quiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C00AD10206927ED00E17D68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C00AD12206927ED00E17D68 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				4C00AD10206927ED00E17D68 /* AppDelegate.swift */,
 				4C00AD12206927ED00E17D68 /* HomeController.swift */,
 				4C00AD14206927ED00E17D68 /* Main.storyboard */,
+				0CBB2AE42074F0D000CD6176 /* ElegirCategoriaViewController.swift */,
 				4C411402206A41A300651772 /* Pregunta.swift */,
 				4C411404206A4C7700651772 /* GestionPreguntas.swift */,
 				4C12143A2069849D00C56F02 /* RoundedButton.swift */,
@@ -224,6 +227,7 @@
 				4C00AD19206927ED00E17D68 /* Quiz.xcdatamodeld in Sources */,
 				4C411403206A41A300651772 /* Pregunta.swift in Sources */,
 				4C00AD11206927ED00E17D68 /* AppDelegate.swift in Sources */,
+				0CBB2AE52074F0D000CD6176 /* ElegirCategoriaViewController.swift in Sources */,
 				4C0C2F83206B9D8E00E4BE8C /* PreguntaTableViewCell.swift in Sources */,
 				4C12143B2069849D00C56F02 /* RoundedButton.swift in Sources */,
 				4C00B512206A97C600AD85DA /* PreguntaViewController.swift in Sources */,

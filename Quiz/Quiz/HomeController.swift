@@ -38,6 +38,13 @@ class HomeController: UIViewController {
             }
             
             gestionarPreguntasController.gestionPreguntas = self.gestionPreguntas
+        case "SeleccionarCategoría":
+            let destinationNavigation = segue.destination as? UINavigationController
+            guard let seleccionarCategoríaController = destinationNavigation?.topViewController as? ElegirCategoriaViewController else {
+                fatalError("Destino de navegación inesperado: \(segue.destination)")
+            }
+            
+            seleccionarCategoríaController.gestionPreguntas = self.gestionPreguntas
         default:
             fatalError("Identificador de navegación desconocido. ")
         }
