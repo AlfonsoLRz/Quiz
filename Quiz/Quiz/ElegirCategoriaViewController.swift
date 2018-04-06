@@ -44,6 +44,11 @@ class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIP
     }
     */
     
+    //MARK: Actions
+    @IBAction func volver(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: UIPickerViewDataSource
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -52,10 +57,14 @@ class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIP
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return (self.gestionPreguntas?.getNumCategorias())!
+        return (self.gestionPreguntas?.getNumCategorias())! + 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return self.gestionPreguntas!.getCategoria(index: row)
+        if row == 0 {
+            return "Todas"
+        } else {
+            return self.gestionPreguntas!.getCategoria(index: row - 1)
+        }
     }
 }

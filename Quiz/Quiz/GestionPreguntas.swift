@@ -108,7 +108,7 @@ class GestionPreguntas {
     private func getCategorías() -> Set<String> {
         // Dado que las categorías se pueden repetir las guardamos en un diccionario.
         // Por defecto la única categoría será Todas.
-        var categorias : Set = ["Todas"]
+        var categorias = Set<String>()
         
         for  pregunta in self.preguntas {
             if let categoria = pregunta.categoria {
