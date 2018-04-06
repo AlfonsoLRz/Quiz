@@ -19,6 +19,7 @@ class Clasificación {
         /// Cargamos los resultados desde fichero desde fichero.
         if let resultados = cargaResultados() {
             self.resultados = resultados
+            self.ordenaResultados()
         }
     }
     
@@ -28,9 +29,22 @@ class Clasificación {
     func añadeResultado(puntuación: Int) {
         if let resultado = ResultadoPartida(fecha: Date(), puntuación: puntuación) {
             self.resultados.append(resultado)
+            self.ordenaResultados()
         } else {
             os_log("Fallo al insertar el nuevo resultado.", log: OSLog.default, type: .error)
         }
+    }
+    
+    func getNumResultados() -> Int {
+        return resultados.count
+    }
+    
+    func getResultado(index: Int) -> ResultadoPartida? {
+        if index < self.resultados.count {
+            return self.resultados[index]
+        }
+        
+        return nil
     }
     
     func guardaResultados() {
@@ -48,5 +62,9 @@ class Clasificación {
     
     private func cargaResultados() -> [ResultadoPartida]? {
         return NSKeyedUnarchiver.unarchiveObject(withFile: ResultadoPartida.ArchivoURL.path) as? [ResultadoPartida]
+    }
+    
+    private func ordenaResultados() {
+        self.resultados.sort(by: {$0.puntuación > $1.puntuación })
     }
 }

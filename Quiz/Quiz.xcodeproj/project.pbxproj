@@ -21,6 +21,8 @@
 		4C12143B2069849D00C56F02 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C12143A2069849D00C56F02 /* RoundedButton.swift */; };
 		4C411403206A41A300651772 /* Pregunta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C411402206A41A300651772 /* Pregunta.swift */; };
 		4C411405206A4C7700651772 /* GestionPreguntas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C411404206A4C7700651772 /* GestionPreguntas.swift */; };
+		4C89180D2077EED600D4D80D /* ClasificaciónTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C89180C2077EED600D4D80D /* ClasificaciónTableViewController.swift */; };
+		4C89180F2078204C00D4D80D /* ResultadosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C89180E2078204C00D4D80D /* ResultadosViewController.swift */; };
 		4CF4D9922077D2A20020545C /* EsperaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4D9912077D2A20020545C /* EsperaViewController.swift */; };
 		4CF4D9942077D36E0020545C /* Partida.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4D9932077D36E0020545C /* Partida.swift */; };
 		4CF4D9962077D3900020545C /* ResultadoPartida.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4D9952077D3900020545C /* ResultadoPartida.swift */; };
@@ -57,6 +59,8 @@
 		4C12143A2069849D00C56F02 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		4C411402206A41A300651772 /* Pregunta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pregunta.swift; sourceTree = "<group>"; };
 		4C411404206A4C7700651772 /* GestionPreguntas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestionPreguntas.swift; sourceTree = "<group>"; };
+		4C89180C2077EED600D4D80D /* ClasificaciónTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClasificaciónTableViewController.swift"; sourceTree = "<group>"; };
+		4C89180E2078204C00D4D80D /* ResultadosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultadosViewController.swift; sourceTree = "<group>"; };
 		4CF4D9912077D2A20020545C /* EsperaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EsperaViewController.swift; sourceTree = "<group>"; };
 		4CF4D9932077D36E0020545C /* Partida.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partida.swift; sourceTree = "<group>"; };
 		4CF4D9952077D3900020545C /* ResultadoPartida.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultadoPartida.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 			children = (
 				4C00AD10206927ED00E17D68 /* AppDelegate.swift */,
 				4CF4D9972077D5E20020545C /* Clasificación.swift */,
+				4C89180C2077EED600D4D80D /* ClasificaciónTableViewController.swift */,
 				0CBB2AE42074F0D000CD6176 /* ElegirCategoriaViewController.swift */,
 				4CF4D9912077D2A20020545C /* EsperaViewController.swift */,
 				4C411404206A4C7700651772 /* GestionPreguntas.swift */,
@@ -116,6 +121,7 @@
 				4C00B511206A97C600AD85DA /* PreguntaViewController.swift */,
 				4CF4D9952077D3900020545C /* ResultadoPartida.swift */,
 				4CF4D9992077E5D10020545C /* ResultadoTableViewCell.swift */,
+				4C89180E2078204C00D4D80D /* ResultadosViewController.swift */,
 				4C12143A2069849D00C56F02 /* RoundedButton.swift */,
 				4C00AD14206927ED00E17D68 /* Main.storyboard */,
 				4C00AD1A206927ED00E17D68 /* Assets.xcassets */,
@@ -240,8 +246,10 @@
 			files = (
 				4C00AD13206927ED00E17D68 /* HomeController.swift in Sources */,
 				4C00AD19206927ED00E17D68 /* Quiz.xcdatamodeld in Sources */,
+				4C89180D2077EED600D4D80D /* ClasificaciónTableViewController.swift in Sources */,
 				4C411403206A41A300651772 /* Pregunta.swift in Sources */,
 				4C00AD11206927ED00E17D68 /* AppDelegate.swift in Sources */,
+				4C89180F2078204C00D4D80D /* ResultadosViewController.swift in Sources */,
 				0CBB2AE52074F0D000CD6176 /* ElegirCategoriaViewController.swift in Sources */,
 				4CF4D9942077D36E0020545C /* Partida.swift in Sources */,
 				4CF4D9922077D2A20020545C /* EsperaViewController.swift in Sources */,

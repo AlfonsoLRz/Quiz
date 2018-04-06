@@ -12,11 +12,14 @@ class HomeController: UIViewController {
     
     // MARK: Atributos
     
+    private let clasificacion = Clasificación()
     private let gestionPreguntas = GestionPreguntas()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.clasificacion.añadeResultado(puntuación: 9000)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,6 +48,13 @@ class HomeController: UIViewController {
             }
             
             seleccionarCategoríaController.gestionPreguntas = self.gestionPreguntas
+        case "MostrarClasificación":
+            let destinationNavigation = segue.destination as? UINavigationController
+            guard let mostrarClasificación = destinationNavigation?.topViewController as? ClasificaciónTableViewController else {
+                fatalError("Destino de navegación inesperado: \(segue.destination)")
+            }
+            
+            mostrarClasificación.clasificacion = self.clasificacion
         default:
             fatalError("Identificador de navegación desconocido. ")
         }

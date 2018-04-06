@@ -13,7 +13,7 @@ class ResultadoPartida: NSObject, NSCoding {
     
     //MARK: Atributos
     private var fecha : Date
-    private var puntuación : Int
+    var puntuación : Int
     
     //MARK: Persistencia
     
@@ -35,6 +35,16 @@ class ResultadoPartida: NSObject, NSCoding {
         
         self.fecha = fecha
         self.puntuación = puntuación
+    }
+    
+    //MARK: Métodos públicos
+    
+    func getFecha() -> String {
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "dd-MM-yyyy HH:mm"
+        
+        return formatter.string(from: self.fecha)
     }
     
     //MARK: NSCoding
