@@ -12,6 +12,8 @@ class Partida {
     
     //MARK: Atributos
     
+    private let PUNTOS_POR_ACIERTO = 150;
+    
     private var aciertos : Int
     private var preguntas : [Pregunta]
     private var preguntasRespondidas : Int
@@ -41,6 +43,10 @@ class Partida {
     
     func getAciertos() -> Int {
         return self.aciertos
+    }
+    
+    func getPuntuación() -> Int {
+        return self.aciertos * self.PUNTOS_POR_ACIERTO
     }
     
     func getSiguientePregunta() -> Pregunta? {

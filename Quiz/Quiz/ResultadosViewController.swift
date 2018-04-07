@@ -21,11 +21,11 @@ class ResultadosViewController: UIViewController {
     //MARK: Atributos
     
     // Constantes
-    private var CABECERA_VICTORIA = "¡Enhorabuena!"
-    private var CABECERA_DERROTA = "¡Vaya!"
+    private let CABECERA_VICTORIA = "¡Enhorabuena!"
+    private let CABECERA_DERROTA = "¡Vaya!"
     
-    private var DESCRIPCIÓN_VICTORIA = "Has completado el test sin fallos"
-    private var DESCRIPCIÓN_DERROTA = "Parece que has fallado esta pregunta"
+    private let DESCRIPCIÓN_VICTORIA = "Has completado el test sin fallos"
+    private let DESCRIPCIÓN_DERROTA = "Parece que has fallado esta pregunta"
     
     var clasificacion : Clasificación?
     var partida : Partida?
@@ -47,6 +47,20 @@ class ResultadosViewController: UIViewController {
         guard let _ = self.victoria else {
             fatalError("Necesitamos conocer si es una victoria o una derrota para mostrar los mensajes oportunos.")
         }
+        
+        // Labels dependientes del resultado de la partida.
+        if self.victoria! {
+            self.cabeceraLabel.text = CABECERA_VICTORIA
+            self.descripciónLabel.text = DESCRIPCIÓN_VICTORIA
+        } else {
+            self.cabeceraLabel.text = CABECERA_DERROTA
+            self.descripciónLabel.text = DESCRIPCIÓN_DERROTA
+        }
+        
+        // Estadísticas.
+        self.aciertosLabel.text = "Aciertos: \(self.partida!.getAciertos())"
+        self.puntuaciónLabel.text = "Puntuación: \(self.partida!.getPuntuación())"
+        self.tiempoMedioLabel.text = "Tiempo medio de respuesta: \(self.partida!.getTiempoMedio())"
     }
 
     override func didReceiveMemoryWarning() {
