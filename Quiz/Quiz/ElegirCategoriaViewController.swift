@@ -11,13 +11,22 @@ import UIKit
 class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     //MARK: Atributos relacionados con la UI
+    
     @IBOutlet weak var seleccionCategoria: UIPickerView!
     
     //MARK: Otras propiedades
+    
+    var clasificación : Clasificación?
     var gestionPreguntas : GestionPreguntas?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Comprobamos que tenemos una clasificación no nula; la necesitaremos para la pantalla final de una partida.
+        guard let _ = self.clasificación else {
+            fatalError("La vista de selección de categorías necesita una clasificación.")
+        }
         
         // Comprobamos que tenemos un gestor de preguntas adecuado.
         guard let _ = self.gestionPreguntas else {
@@ -34,20 +43,41 @@ class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIP
     }
     
 
-    /*
-    // MARK: - Navigation
+    // MARK: Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "ComenzarPartida" {
+            let destinationNavigation = segue.destination as? UINavigationController
+            guard let responderPreguntaController = destinationNavigation?.topViewController as? ResponderPreguntaViewController else {
+                fatalError("Destino de navegación inesperado: \(segue.destination)")
+            }
+            
+            // Obtenemos la categoría seleccionada.
+            let index = self.seleccionCategoria.selectedRow(inComponent: 0)
+            var preguntas : [Pregunta]
+            if index >= 1 {
+                let categoria = self.gestionPreguntas!.getCategoria(index: index - 1)
+                preguntas = self.gestionPreguntas!.filtrarPorCategoria(categoria: categoria)
+            } else {
+                preguntas = self.gestionPreguntas!.getTodas()
+            }
+            
+            responderPreguntaController.clasificación = self.clasificación
+            responderPreguntaController.partida = Partida(preguntas: preguntas)
+        } else {
+            fatalError("Navegación desconocida en la vista de Elegir categoría.")
+        }
     }
-    */
+    
     
     //MARK: Actions
+    
     @IBAction func volver(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
+    
     
     // MARK: UIPickerViewDataSource
     

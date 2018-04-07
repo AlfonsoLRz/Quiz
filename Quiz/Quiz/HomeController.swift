@@ -47,6 +47,7 @@ class HomeController: UIViewController {
                 fatalError("Destino de navegación inesperado: \(segue.destination)")
             }
             
+            seleccionarCategoríaController.clasificación = self.clasificacion
             seleccionarCategoríaController.gestionPreguntas = self.gestionPreguntas
         case "MostrarClasificación":
             let destinationNavigation = segue.destination as? UINavigationController

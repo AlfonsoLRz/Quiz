@@ -59,7 +59,7 @@ class Partida {
     
     func getSiguientePregunta() -> Pregunta? {
         let preguntasUtilizadas = self.getPreguntasUtilizadas()
-        if preguntasUtilizadas < self.preguntas.count {
+        if preguntasUtilizadas == self.preguntas.count {
             return nil
         }
         
@@ -77,6 +77,10 @@ class Partida {
         }
         
         return 0
+    }
+    
+    func getTotalPreguntas() -> Int {
+        return self.preguntas.count
     }
     
     

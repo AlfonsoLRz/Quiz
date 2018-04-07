@@ -26,6 +26,9 @@ class EsperaViewController: UIViewController {
         guard let _ = self.partida else {
             fatalError("No hay información de la partida. No podemos continuar...")
         }
+        
+        // Una vez sabemos que tenemos los datos necesarios, actualizamos la interfaz.
+        self.preparaVista()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,8 +46,19 @@ class EsperaViewController: UIViewController {
     }
     */
 
+    
     //MARK: Actions
-    @IBAction func pasarAPreguntar(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+    
+    @IBAction func salir(_ sender: UIBarButtonItem) {
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    //MARK: Métodos privados
+    
+    private func preparaVista() {
+        self.aciertosLabel.text = "Aciertos: \(self.partida!.getAciertos())"
+        self.puntuaciónLabel.text = "Puntuación: \(self.partida!.getPuntuación())"
+        self.tiempoMedioLabel.text = "Tiempo medio de respuesta: \(self.partida!.getTiempoMedio()) s"
     }
 }

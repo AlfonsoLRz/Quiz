@@ -14,6 +14,7 @@ class ResultadosViewController: UIViewController {
     
     @IBOutlet weak var cabeceraLabel: UILabel!
     @IBOutlet weak var descripciónLabel: UILabel!
+    @IBOutlet weak var imagen: UIImageView!
     @IBOutlet weak var aciertosLabel: UILabel!
     @IBOutlet weak var puntuaciónLabel: UILabel!
     @IBOutlet weak var tiempoMedioLabel: UILabel!
@@ -25,7 +26,7 @@ class ResultadosViewController: UIViewController {
     private let CABECERA_DERROTA = "¡Vaya!"
     
     private let DESCRIPCIÓN_VICTORIA = "Has completado el test sin fallos"
-    private let DESCRIPCIÓN_DERROTA = "Parece que has fallado esta pregunta"
+    private let DESCRIPCIÓN_DERROTA = "No has completado el test sin fallos"
     
     var clasificacion : Clasificación?
     var partida : Partida?
@@ -57,10 +58,15 @@ class ResultadosViewController: UIViewController {
             self.descripciónLabel.text = DESCRIPCIÓN_DERROTA
         }
         
+        // Imagen: sólo la cambiamos si es una derrota, ya que por defecto será el trofeo de victoria.
+        if !self.victoria! {
+            self.imagen.image = UIImage(named: "EmojiRespuestaFallida")
+        }
+        
         // Estadísticas.
         self.aciertosLabel.text = "Aciertos: \(self.partida!.getAciertos())"
         self.puntuaciónLabel.text = "Puntuación: \(self.partida!.getPuntuación())"
-        self.tiempoMedioLabel.text = "Tiempo medio de respuesta: \(self.partida!.getTiempoMedio())"
+        self.tiempoMedioLabel.text = "Tiempo medio de respuesta: \(self.partida!.getTiempoMedio()) s"
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,7 +86,6 @@ class ResultadosViewController: UIViewController {
     */
     
     //MARK: Actions
-    
-    
+
 
 }

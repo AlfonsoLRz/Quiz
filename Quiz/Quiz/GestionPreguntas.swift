@@ -73,6 +73,10 @@ class GestionPreguntas {
         return nil
     }
     
+    func getTodas() -> [Pregunta] {
+        return self.preguntas
+    }
+    
     func guardaPreguntas() {
         let exitoGuardado = NSKeyedArchiver.archiveRootObject(preguntas, toFile: Pregunta.ArchivoURL.path)
         
