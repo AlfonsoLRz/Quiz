@@ -49,6 +49,7 @@ class ClasificaciónTableViewController: UITableViewController {
         let resultado = self.clasificacion!.getResultado(index: indexPath.row)
         
         // Tenemos que modificar también la celda con el resultado obtenido.
+        cell.categoríaLabel.text = resultado!.getCategoría()
         cell.posicionLabel.text = String(indexPath.row + 1)
         cell.puntuacionLabel.text = String(resultado!.puntuación)
         cell.timestampLabel.text = resultado!.getFecha()

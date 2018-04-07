@@ -15,17 +15,19 @@ class Partida {
     private let PUNTOS_POR_ACIERTO = 150;
     
     private var aciertos : Int
+    private var categoría : String
     private var preguntas : [Pregunta]
     private var preguntasSinUtilizar = [Int]()
     private var tiempoTotal : Int
     
     
-    init?(preguntas: [Pregunta]) {
+    init?(categoría: String, preguntas: [Pregunta]) {
         if preguntas.count == 0 {
             return nil
         }
         
         self.aciertos = 0
+        self.categoría = categoría
         self.preguntas = preguntas
         self.tiempoTotal = 0        // Tiempo empleado en responder todas las preguntas en segundos.
         
@@ -47,6 +49,10 @@ class Partida {
     
     func getAciertos() -> Int {
         return self.aciertos
+    }
+    
+    func getCategoría() -> String {
+        return self.categoría
     }
     
     func getPreguntasUtilizadas() -> Int {

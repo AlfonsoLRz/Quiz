@@ -33,6 +33,7 @@ class Pregunta : NSObject, NSCoding {
     static let DirectorioDocumentos = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let ArchivoURL = DirectorioDocumentos.appendingPathComponent("preguntas")
     
+    
     //MARK: Constructor
     
     init?(titulo: String, imagen: UIImage?, categoria: String?, respuestas : [String], mensaje: inout String) {

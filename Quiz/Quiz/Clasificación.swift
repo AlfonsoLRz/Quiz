@@ -16,9 +16,9 @@ class Clasificación {
     
     
     init() {
-        /// Cargamos los resultados desde fichero desde fichero.
+        // Cargamos los resultados desde fichero desde fichero.
         if let resultados = cargaResultados() {
-            self.resultados = resultados
+            self.resultados += resultados
             self.ordenaResultados()
         }
     }
@@ -26,8 +26,8 @@ class Clasificación {
     
     //MARK: Métodos públicos
     
-    func añadeResultado(puntuación: Int) {
-        if let resultado = ResultadoPartida(fecha: Date(), puntuación: puntuación) {
+    func añadeResultado(categoría: String, puntuación: Int) {
+        if let resultado = ResultadoPartida(categoría: categoría, fecha: Date(), puntuación: puntuación) {
             self.resultados.append(resultado)
             self.ordenaResultados()
         } else {

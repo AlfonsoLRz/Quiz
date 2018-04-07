@@ -57,15 +57,16 @@ class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIP
             // Obtenemos la categoría seleccionada.
             let index = self.seleccionCategoria.selectedRow(inComponent: 0)
             var preguntas : [Pregunta]
+            var categoria = "Todas"
             if index >= 1 {
-                let categoria = self.gestionPreguntas!.getCategoria(index: index - 1)
+                categoria = self.gestionPreguntas!.getCategoria(index: index - 1)
                 preguntas = self.gestionPreguntas!.filtrarPorCategoria(categoria: categoria)
             } else {
                 preguntas = self.gestionPreguntas!.getTodas()
             }
             
             responderPreguntaController.clasificación = self.clasificación
-            responderPreguntaController.partida = Partida(preguntas: preguntas)
+            responderPreguntaController.partida = Partida(categoría: categoria, preguntas: preguntas)
         } else {
             fatalError("Navegación desconocida en la vista de Elegir categoría.")
         }

@@ -14,12 +14,18 @@ class HomeController: UIViewController {
     
     private let clasificacion = Clasificación()
     private let gestionPreguntas = GestionPreguntas()
+    var segueARealizar : String?
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let segue = self.segueARealizar {
+            self.performSegue(withIdentifier: segue, sender: nil)
+        }
+        self.segueARealizar = nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.clasificacion.añadeResultado(puntuación: 9000)
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,6 +65,10 @@ class HomeController: UIViewController {
         default:
             fatalError("Identificador de navegación desconocido. ")
         }
+    }
+    
+    @IBAction func unwindToHome(sender: UIStoryboardSegue) {
+        
     }
 }
 

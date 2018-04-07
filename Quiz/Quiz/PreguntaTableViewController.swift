@@ -154,7 +154,7 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch (segue.identifier ?? "") {
         case "AñadirPregunta":
-            os_log("Añadir una nueva comida.", log: OSLog.default, type: .debug)
+            os_log("Añadir una nueva pregunta.", log: OSLog.default, type: .debug)
         case "ModificarPregunta":
             guard let preguntaController = segue.destination as? PreguntaViewController else {
                 fatalError("Destino inesperado: \(segue.destination)")

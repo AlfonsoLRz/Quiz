@@ -31,7 +31,7 @@ class ResultadosViewController: UIViewController {
     var clasificacion : Clasificación?
     var partida : Partida?
     var victoria : Bool?
-    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +48,10 @@ class ResultadosViewController: UIViewController {
         guard let _ = self.victoria else {
             fatalError("Necesitamos conocer si es una victoria o una derrota para mostrar los mensajes oportunos.")
         }
+        
+        //IMPORTANTE: Guardamos los resultados de esta partida en la clasificación.
+        self.clasificacion!.añadeResultado(categoría: self.partida!.getCategoría(), puntuación: self.partida!.getPuntuación())
+        self.clasificacion!.guardaResultados()
         
         // Labels dependientes del resultado de la partida.
         if self.victoria! {
@@ -75,17 +79,44 @@ class ResultadosViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
+    // MARK: Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        switch segue.identifier ?? "" {
+        case"ConsultarRanking":
+            let destinationNavigation = segue.destination as? UINavigationController
+            guard let clasificaciónController = destinationNavigation?.topViewController as? ClasificaciónTableViewController else {
+                fatalError("Destino de navegación inesperado: \(segue.destination)")
+            }
+            
+            clasificaciónController.clasificacion = self.clasificacion
+        case "VolverAJugar":
+            print(segue.destination)
+            guard let homeController = segue.destination as? HomeController else {
+                fatalError("Destino de navegación inesperado: \(segue.destination)")
+            }
+            
+            homeController.segueARealizar = "SeleccionarCategoría"
+        case "ConsultarRanking":
+            let destinationNavigation = segue.destination as? UINavigationController
+            guard let mostrarClasificación = destinationNavigation?.topViewController as? ClasificaciónTableViewController else {
+                fatalError("Destino de navegación inesperado: \(segue.destination)")
+            }
+            
+            mostrarClasificación.clasificacion = self.clasificacion
+        default:
+            fatalError("Identificador de segue desconocido: \(String(describing: segue.identifier))")
+        }
     }
-    */
+    
     
     //MARK: Actions
-
-
+    
+    @IBAction func salir(_ sender: UIBarButtonItem) {
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func volverAJugar(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "VolverAJugar", sender: sender)
+    }
 }
