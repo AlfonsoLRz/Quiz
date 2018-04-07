@@ -21,6 +21,7 @@
 		4C12143B2069849D00C56F02 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C12143A2069849D00C56F02 /* RoundedButton.swift */; };
 		4C411403206A41A300651772 /* Pregunta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C411402206A41A300651772 /* Pregunta.swift */; };
 		4C411405206A4C7700651772 /* GestionPreguntas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C411404206A4C7700651772 /* GestionPreguntas.swift */; };
+		4C57420F2078D4A0006FC171 /* ResponderPreguntaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C57420E2078D4A0006FC171 /* ResponderPreguntaViewController.swift */; };
 		4C89180D2077EED600D4D80D /* ClasificaciónTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C89180C2077EED600D4D80D /* ClasificaciónTableViewController.swift */; };
 		4C89180F2078204C00D4D80D /* ResultadosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C89180E2078204C00D4D80D /* ResultadosViewController.swift */; };
 		4CF4D9922077D2A20020545C /* EsperaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4D9912077D2A20020545C /* EsperaViewController.swift */; };
@@ -59,6 +60,7 @@
 		4C12143A2069849D00C56F02 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		4C411402206A41A300651772 /* Pregunta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pregunta.swift; sourceTree = "<group>"; };
 		4C411404206A4C7700651772 /* GestionPreguntas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestionPreguntas.swift; sourceTree = "<group>"; };
+		4C57420E2078D4A0006FC171 /* ResponderPreguntaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponderPreguntaViewController.swift; sourceTree = "<group>"; };
 		4C89180C2077EED600D4D80D /* ClasificaciónTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClasificaciónTableViewController.swift"; sourceTree = "<group>"; };
 		4C89180E2078204C00D4D80D /* ResultadosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultadosViewController.swift; sourceTree = "<group>"; };
 		4CF4D9912077D2A20020545C /* EsperaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EsperaViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				4C0C2F82206B9D8E00E4BE8C /* PreguntaTableViewCell.swift */,
 				4C0C2F84206BA0E800E4BE8C /* PreguntaTableViewController.swift */,
 				4C00B511206A97C600AD85DA /* PreguntaViewController.swift */,
+				4C57420E2078D4A0006FC171 /* ResponderPreguntaViewController.swift */,
 				4CF4D9952077D3900020545C /* ResultadoPartida.swift */,
 				4CF4D9992077E5D10020545C /* ResultadoTableViewCell.swift */,
 				4C89180E2078204C00D4D80D /* ResultadosViewController.swift */,
@@ -259,6 +262,7 @@
 				4C00B512206A97C600AD85DA /* PreguntaViewController.swift in Sources */,
 				4CF4D9982077D5E20020545C /* Clasificación.swift in Sources */,
 				4C411405206A4C7700651772 /* GestionPreguntas.swift in Sources */,
+				4C57420F2078D4A0006FC171 /* ResponderPreguntaViewController.swift in Sources */,
 				4CF4D9962077D3900020545C /* ResultadoPartida.swift in Sources */,
 				4C0C2F85206BA0E800E4BE8C /* PreguntaTableViewController.swift in Sources */,
 			);

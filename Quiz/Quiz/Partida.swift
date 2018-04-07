@@ -16,7 +16,7 @@ class Partida {
     
     private var aciertos : Int
     private var preguntas : [Pregunta]
-    private var preguntasRespondidas : Int
+    private var preguntasSinUtilizar = [Int]()
     private var tiempoTotal : Int
     
     
@@ -27,8 +27,12 @@ class Partida {
         
         self.aciertos = 0
         self.preguntas = preguntas
-        self.preguntasRespondidas = 0
         self.tiempoTotal = 0        // Tiempo empleado en responder todas las preguntas en segundos.
+        
+        // Inicializamos el vector de preguntas sin responder...
+        for i in 0..<self.preguntas.count {
+            self.preguntasSinUtilizar.append(i)
+        }
     }
     
     //MARK: Métodos públicos
@@ -45,25 +49,40 @@ class Partida {
         return self.aciertos
     }
     
+    func getPreguntasUtilizadas() -> Int {
+        return self.preguntas.count - self.preguntasSinUtilizar.count
+    }
+    
     func getPuntuación() -> Int {
         return self.aciertos * self.PUNTOS_POR_ACIERTO
     }
     
     func getSiguientePregunta() -> Pregunta? {
-        if self.preguntasRespondidas < self.preguntas.count {
+        let preguntasUtilizadas = self.getPreguntasUtilizadas()
+        if preguntasUtilizadas < self.preguntas.count {
             return nil
         }
         
         // No tenemos operador unario ++...
-        self.preguntasRespondidas += 1
-        return self.preguntas[self.preguntasRespondidas - 1]
+        let randomIndex = self.getSiguienteÍndice()
+        let index = self.preguntasSinUtilizar[randomIndex]
+        self.preguntasSinUtilizar.remove(at: randomIndex)
+        return self.preguntas[index]
     }
     
     func getTiempoMedio() -> Float {
-        if self.preguntasRespondidas != 0 {
-            return (Float(self.tiempoTotal / self.preguntasRespondidas))
+        let preguntasUtilizadas = self.getPreguntasUtilizadas()
+        if preguntasUtilizadas != 0 {
+            return (Float(self.tiempoTotal / preguntasUtilizadas))
         }
         
         return 0
+    }
+    
+    
+    //MARK: Métodos privados
+    
+    private func getSiguienteÍndice() -> Int {
+        return Int(arc4random_uniform(UInt32(self.preguntasSinUtilizar.count)))
     }
 }

@@ -605,7 +605,7 @@
         <!--RespondePregunta-->
         <scene sceneID="Xd8-8q-XQn">
             <objects>
-                <viewController id="Vzl-t6-Bzm" userLabel="RespondePregunta" sceneMemberID="viewController">
+                <viewController id="Vzl-t6-Bzm" userLabel="RespondePregunta" customClass="ResponderPreguntaViewController" customModule="Quiz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="v2U-RW-M6z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -747,6 +747,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KOF-jR-Kvi"/>
                     </view>
+                    <connections>
+                        <outlet property="respuesta1" destination="1ki-YE-9rF" id="hgK-Bz-nJN"/>
+                        <outlet property="respuesta2" destination="6OK-8L-z1e" id="DBn-eS-gUu"/>
+                        <outlet property="respuesta3" destination="1SV-Ay-Lfy" id="zYE-rs-2gO"/>
+                        <outlet property="respuesta4" destination="xhy-r4-mPo" id="Tv3-nw-SIg"/>
+                        <outlet property="tituloLabel" destination="gtT-sk-Uzb" id="CjQ-0J-kyr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rgc-KN-RSC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
