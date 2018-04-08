@@ -35,6 +35,16 @@ class Clasificación {
         }
     }
     
+    func filtrarPorCategoria(categoria: String) -> [ResultadoPartida] {
+        return self.resultados.filter({(resultado: ResultadoPartida) -> Bool in return
+            resultado.getCategoría().lowercased().contains(categoria.lowercased())
+        })
+    }
+    
+    func eliminaResultado(index: Int) {
+        self.resultados.remove(at: index)
+    }
+    
     func getNumResultados() -> Int {
         return resultados.count
     }
@@ -55,6 +65,10 @@ class Clasificación {
         } else {
             os_log("Fallo al guardar los resultados.", log: OSLog.default, type: .error)
         }
+    }
+    
+    func índiceDeResultado(resultado: ResultadoPartida) -> Int? {
+        return self.resultados.index(of: resultado)
     }
     
     

@@ -8,11 +8,16 @@
 
 import UIKit
 
-class ClasificaciónTableViewController: UITableViewController {
+class ClasificaciónTableViewController: UITableViewController, UISearchResultsUpdating {
     
     //MARK: Atributos
     
     var clasificacion : Clasificación?
+    private var resultadosFiltrados = [ResultadoPartida]()
+    
+    
+    //MARK: Atributos relacionados con la interfaz
+    private let searchController = UISearchController(searchResultsController: nil)
 
     
     override func viewDidLoad() {
@@ -22,6 +27,15 @@ class ClasificaciónTableViewController: UITableViewController {
         guard let _ = self.clasificacion else {
             fatalError("La vista de Clasificación necesita los resultados obtenidos.")
         }
+        
+        // Configuramos la barra de búsqueda.
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.searchBar.placeholder = "Busca resultados por categoría"
+        self.navigationItem.searchController = searchController
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+        self.definesPresentationContext = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,6 +50,10 @@ class ClasificaciónTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if estáFiltrando() {
+            return self.resultadosFiltrados.count
+        }
+        
         return self.clasificacion!.getNumResultados()
     }
 
@@ -46,7 +64,12 @@ class ClasificaciónTableViewController: UITableViewController {
         }
 
         // Obtenemos el resultado que debemos mostrar.
-        let resultado = self.clasificacion!.getResultado(index: indexPath.row)
+        var resultado : ResultadoPartida?
+        if estáFiltrando() {
+            resultado = self.resultadosFiltrados[indexPath.row]
+        } else {
+            resultado = self.clasificacion!.getResultado(index: indexPath.row)
+        }
         
         // Tenemos que modificar también la celda con el resultado obtenido.
         cell.categoríaLabel.text = resultado!.getCategoría()
@@ -73,35 +96,53 @@ class ClasificaciónTableViewController: UITableViewController {
 
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return false
+        return true
     }
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            // Actualizamos la clasificación.
+            if estáFiltrando() {
+                if let index = self.clasificacion!.índiceDeResultado(resultado: self.resultadosFiltrados[indexPath.row]) {
+                    self.clasificacion!.eliminaResultado(index: index)
+                }
+                
+                self.resultadosFiltrados.remove(at: indexPath.row)
+            } else {
+                self.clasificacion!.eliminaResultado(index: indexPath.row)
+            }
+            
+            // Guardamos en fichero los nuevos resultados.
+            self.clasificacion!.guardaResultados()
+            
+            // Actualizamos la tabla.
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    
+    //MARK: Soporte para la búsqueda.
+    
+    private func barraDeBúsquedaVacía() -> Bool {
+        return self.searchController.searchBar.text?.isEmpty ?? true
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    private func estáFiltrando() -> Bool {
+        return self.searchController.isActive && !barraDeBúsquedaVacía()
     }
-    */
+    
+    private func filtraContenido(textoBúsqueda: String) {
+        self.resultadosFiltrados = self.clasificacion!.filtrarPorCategoria(categoria: textoBúsqueda)
+        tableView.reloadData()
+    }
+    
+    
+    //MARK: UISearchResultsUpdating
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filtraContenido(textoBúsqueda: self.searchController.searchBar.text!)
+    }
 
     /*
     // MARK: - Navigation

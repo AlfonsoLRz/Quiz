@@ -56,13 +56,16 @@ class ResponderPreguntaViewController: UIViewController {
     
     @objc func decrementaTiempo() {
         self.tiempoRestante -= 1
-        self.timerLabel.text = String(self.tiempoRestante)
         
-        if self.tiempoRestante == 0 {
+        if self.tiempoRestante == -1 {
+            self.timerLabel.text = "--"
             self.timer!.invalidate()
             
             self.partida!.sumarTiempo(tiempo: 30)
             self.performSegue(withIdentifier: "MostrarResultado", sender: nil)
+        } else {
+            // Si todavía no es el final mostramos el tiempo restante.
+            self.timerLabel.text = String(self.tiempoRestante)
         }
     }
     
