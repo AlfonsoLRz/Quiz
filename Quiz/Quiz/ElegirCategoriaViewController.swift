@@ -67,13 +67,27 @@ class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIP
             
             responderPreguntaController.clasificación = self.clasificación
             responderPreguntaController.partida = Partida(categoría: categoria, preguntas: preguntas)
-        } else {
+        } else if segue.identifier != "NoPreguntasPopOver" {
             fatalError("Navegación desconocida en la vista de Elegir categoría.")
         }
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "ComenzarPartida" {
+            return self.gestionPreguntas!.getNumPreguntas() > 0
+        } 
+        
+        return false
+    }
+    
     
     //MARK: Actions
+    
+    @IBAction func comenzarPartida(_ sender: UIButton) {
+        if self.gestionPreguntas!.getNumPreguntas() == 0 {
+            self.performSegue(withIdentifier: "NoPreguntasPopOver", sender: sender)
+        }
+    }
     
     @IBAction func volver(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)

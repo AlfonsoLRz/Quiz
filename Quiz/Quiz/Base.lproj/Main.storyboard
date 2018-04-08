@@ -511,10 +511,73 @@
             </objects>
             <point key="canvasLocation" x="-425" y="118"/>
         </scene>
+        <!--PopOverNoPreguntas-->
+        <scene sceneID="dhb-db-sEf">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" id="SpK-tU-eCx" userLabel="PopOverNoPreguntas" customClass="NoPreguntasPopOverViewController" customModule="Quiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ogL-wB-Vro">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view opaque="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="va1-9C-1sp" userLabel="Fondo">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nig-bG-sgJ" userLabel="MensajePopOver">
+                                <rect key="frame" x="76" y="318" width="262" height="120"/>
+                                <subviews>
+                                    <stackView contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0Ja-9c-pKM">
+                                        <rect key="frame" x="18" y="8" width="226" height="100"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Debe haber al menos una pregunta para poder comenzar una partida" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TeL-P1-ctj">
+                                                <rect key="frame" x="113" y="0.0" width="0.0" height="70"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="70" id="hht-2x-xzt"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LqZ-Hg-2Ym">
+                                                <rect key="frame" x="98" y="70" width="30" height="30"/>
+                                                <state key="normal" title="OK"/>
+                                                <connections>
+                                                    <action selector="volver:" destination="SpK-tU-eCx" eventType="touchUpInside" id="ZoL-PZ-ohy"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="262" id="9y8-lS-baL"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="0Ja-9c-pKM" secondAttribute="trailing" constant="10" id="AMO-bu-iCw"/>
+                                    <constraint firstItem="0Ja-9c-pKM" firstAttribute="leading" secondItem="Nig-bG-sgJ" secondAttribute="leadingMargin" constant="10" id="DpB-1f-JwE"/>
+                                    <constraint firstItem="0Ja-9c-pKM" firstAttribute="top" secondItem="Nig-bG-sgJ" secondAttribute="topMargin" id="cH1-F2-LAG"/>
+                                    <constraint firstAttribute="height" constant="120" id="k9v-AH-VyL"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="0.54797196061643838" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="va1-9C-1sp" firstAttribute="top" secondItem="ogL-wB-Vro" secondAttribute="top" id="1u4-xz-vB1"/>
+                            <constraint firstItem="va1-9C-1sp" firstAttribute="bottom" secondItem="ebP-Jj-fpG" secondAttribute="bottom" id="Hjz-hw-czJ"/>
+                            <constraint firstItem="Nig-bG-sgJ" firstAttribute="centerY" secondItem="ebP-Jj-fpG" secondAttribute="centerY" id="MTj-9g-CIe"/>
+                            <constraint firstItem="va1-9C-1sp" firstAttribute="trailing" secondItem="ebP-Jj-fpG" secondAttribute="trailing" id="cSa-QH-BIR"/>
+                            <constraint firstItem="va1-9C-1sp" firstAttribute="leading" secondItem="ebP-Jj-fpG" secondAttribute="leading" id="e1m-KY-yxq"/>
+                            <constraint firstItem="Nig-bG-sgJ" firstAttribute="centerX" secondItem="ebP-Jj-fpG" secondAttribute="centerX" id="e6o-1S-eU2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ebP-Jj-fpG"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RFA-s1-sxE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2005.7971014492755" y="2192.1195652173915"/>
+        </scene>
         <!--Seleccionar categoría-->
         <scene sceneID="idw-Nz-9bm">
             <objects>
-                <viewController id="SAJ-BD-b9Z" userLabel="Seleccionar categoría" customClass="ElegirCategoriaViewController" customModule="Quiz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" id="SAJ-BD-b9Z" userLabel="Seleccionar categoría" customClass="ElegirCategoriaViewController" customModule="Quiz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WvY-Td-NZ5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -557,6 +620,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
+                                                            <action selector="comenzarPartida:" destination="SAJ-BD-b9Z" eventType="touchUpInside" id="UhR-sj-KUW"/>
                                                             <segue destination="Yax-Rj-6Ua" kind="presentation" identifier="ComenzarPartida" id="fp0-Gg-mcl"/>
                                                         </connections>
                                                     </button>
@@ -599,6 +663,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="seleccionCategoria" destination="7fx-RU-Du3" id="m5M-dM-HeY"/>
+                        <segue destination="SpK-tU-eCx" kind="presentation" identifier="NoPreguntasPopOver" modalPresentationStyle="overCurrentContext" id="tOX-jK-h3i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hY5-cm-kJo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1294,7 +1359,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7x6-nq-lNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-395" y="3187"/>
+            <point key="canvasLocation" x="-396" y="3187"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Q0Y-h8-mCM">
