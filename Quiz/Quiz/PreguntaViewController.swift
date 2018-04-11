@@ -13,11 +13,6 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
     
     //MARK: Atributos de la interfaz
     
-    // Pop over
-    @IBOutlet weak var popOver: UIView!
-    @IBOutlet weak var mensajePopOver: UIView!
-    @IBOutlet weak var labelPopOver: UILabel!
-    
     // Barra de navegación
     @IBOutlet var botonGuardar: UIBarButtonItem!
     
@@ -42,10 +37,6 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // El pop over está escondido por defecto.
-        self.popOver.isHidden = true
-        self.mensajePopOver.isHidden = true
 
         // Recibir eventos de los text fields...
         tituloPregunta.delegate = self
@@ -89,9 +80,10 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         // Si el mensaje no es nulo la creación de pregunta no ha tenido éxito.
         if let mensaje = creaPregunta() {
-            popOver.isHidden = false
-            mensajePopOver.isHidden = false
-            labelPopOver.text = mensaje
+            // Creamos la alerta con el fallo al crear la pregunta.
+            let alert = UIAlertController(title: "Error al crear la pregunta", message: mensaje, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             
             return false
         }
@@ -123,11 +115,6 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
 
     
     //MARK: Actions
-    
-    @IBAction func aceptarMensajePopOver(_ sender: UIButton) {
-        popOver.isHidden = true
-        mensajePopOver.isHidden = true
-    }
     
     @IBAction func cancelar(_ sender: UIBarButtonItem) {
         if self.navigationItem.title == "Añadir pregunta" {

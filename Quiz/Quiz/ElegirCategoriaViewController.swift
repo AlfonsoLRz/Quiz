@@ -14,6 +14,7 @@ class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIP
     
     @IBOutlet weak var seleccionCategoria: UIPickerView!
     
+    
     //MARK: Otras propiedades
     
     var clasificación : Clasificación?
@@ -67,7 +68,7 @@ class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIP
             
             responderPreguntaController.clasificación = self.clasificación
             responderPreguntaController.partida = Partida(categoría: categoria, preguntas: preguntas)
-        } else if segue.identifier != "NoPreguntasPopOver" {
+        } else {
             fatalError("Navegación desconocida en la vista de Elegir categoría.")
         }
     }
@@ -85,7 +86,10 @@ class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIP
     
     @IBAction func comenzarPartida(_ sender: UIButton) {
         if self.gestionPreguntas!.getNumPreguntas() == 0 {
-            self.performSegue(withIdentifier: "NoPreguntasPopOver", sender: sender)
+            // Creamos la alerta con el mensaje de error.
+            let alert = UIAlertController(title: "No podemos jugar", message: "Para poder jugar se necesita al menos una pregunta", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

@@ -112,6 +112,13 @@ class ResultadosViewController: UIViewController {
     
     //MARK: Actions
     
+    @IBAction func compartir(_ sender: UIButton) {
+        // Necesitamos crear la alerta donde se mostrarán las diferentes posibilidades.
+        let activityController = UIActivityViewController(activityItems: ["¡Acabo de conseguir una puntuación de \(self.partida!.getPuntuación()) con \(self.partida!.getTiempoMedio()) aciertos!",
+            #imageLiteral(resourceName: "DefaultImage")], applicationActivities: nil)
+        present(activityController, animated: true, completion: nil)
+    }
+    
     @IBAction func salir(_ sender: UIBarButtonItem) {
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }

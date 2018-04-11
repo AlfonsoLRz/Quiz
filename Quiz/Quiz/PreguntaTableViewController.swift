@@ -49,8 +49,7 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
         
         // Barra de búsqueda.
         self.searchController.searchResultsUpdater = self   // ¿Quién recibe información de actualizaciones en la barra de búsqueda?
-        self.searchController.obscuresBackgroundDuringPresentation = false
-        self.searchController.hidesNavigationBarDuringPresentation = false  // Evitar esconder la barra de navegación al buscar.
+        self.searchController.obscuresBackgroundDuringPresentation = false  // Evitar esconder la barra de navegación al buscar.
         self.searchController.searchBar.placeholder = "Busca preguntas"
         self.navigationItem.searchController = self.searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false     // Siempre aparece la barra de búsqueda.
@@ -262,20 +261,11 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
                 
             // Añadimos una nueva comida.
             } else {
-                var nuevoIndice : IndexPath?
+                let nuevoIndice = IndexPath(row: self.gestionPreguntas!.getNumPreguntas(), section: 0)
                 
-                if estaFiltrando() && self.gestionPreguntas!.preguntaEncajaEnBusqueda(pregunta: pregunta, busqueda: searchController.searchBar.text!, campo: searchController.searchBar.scopeButtonTitles![searchController.searchBar.selectedScopeButtonIndex]) {
-                    nuevoIndice = IndexPath(row: preguntasFiltradas.count, section: 0)
-                    preguntasFiltradas.append(pregunta)
-                } else if !estaFiltrando() {
-                    nuevoIndice = IndexPath(row: self.gestionPreguntas!.getNumPreguntas(), section: 0)
-                }
-                
+                // Se añade a nuestra fuente de preguntas y se inserta en la tabla físicamente.
                 self.gestionPreguntas!.añadirPreguntas(preguntas: [pregunta])
-                
-                if let indice = nuevoIndice {
-                    tableView.insertRows(at: [indice], with: .automatic)
-                }
+                tableView.insertRows(at: [nuevoIndice], with: .automatic)
             }
             
             // Guardamos cambios en fichero.

@@ -18,8 +18,20 @@ class ResponderPreguntaViewController: UIViewController {
     var tiempoRestante = 30
     var timer : Timer?
     
+    // Colores de fondo posibles
+    let colorFondo = [
+        UIColor(red: 256, green: 0, blue: 0, alpha: 0.2),
+        UIColor(red: 0, green: 256, blue: 0, alpha: 0.4),
+        UIColor(red: 0, green: 0, blue: 256, alpha: 0.3),
+        UIColor(red: 256, green: 256, blue: 0, alpha: 0.4),
+        UIColor(red: 256, green: 0, blue: 256, alpha: 0.5),
+        UIColor(red: 0, green: 256, blue: 256, alpha: 0.5),
+        UIColor(red: 256, green: 256, blue: 256, alpha: 1)
+    ]
+    
     //MARK: Atributos relacionados con la interfaz
     
+    @IBOutlet weak var fondoView: UIView!
     @IBOutlet weak var tituloLabel: UILabel!
     @IBOutlet weak var imagen: UIImageView!
     @IBOutlet weak var respuesta1: UIButton!
@@ -101,9 +113,6 @@ class ResponderPreguntaViewController: UIViewController {
     @IBAction func unwindToResponderPregunta(sender: UIStoryboardSegue) {
         // Lo único que tendremos que hacer es sacar la siguiente pregunta y actualizar timers.
         self.cambiaPregunta()
-        
-        // Actualizamos la interfaz.
-        self.preparaVista(pregunta: self.preguntaActual!)
     }
     
     
@@ -189,6 +198,10 @@ class ResponderPreguntaViewController: UIViewController {
         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ResponderPreguntaViewController.decrementaTiempo), userInfo: nil, repeats: true)
     }
     
+    private func getColorAleatorio() -> Int {
+        return Int(arc4random_uniform(UInt32(self.colorFondo.count)))
+    }
+    
     private func preparaVista(pregunta: Pregunta) {
         self.title = "Pregunta \(self.partida!.getPreguntasUtilizadas()) de \(self.partida!.getTotalPreguntas())"
         self.tituloLabel.text = pregunta.titulo
@@ -217,5 +230,11 @@ class ResponderPreguntaViewController: UIViewController {
         
         // Tiempo restante.
         self.timerLabel.text = String(self.tiempoRestante)
+        
+        // Primer color de fondo...
+        let indiceColor = self.getColorAleatorio()
+        fondoView.backgroundColor = colorFondo[indiceColor]
+        
+        print(indiceColor)
     }
 }
