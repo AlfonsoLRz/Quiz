@@ -72,10 +72,10 @@ class ClasificaciónTableViewController: UITableViewController, UISearchResultsU
         }
         
         // Tenemos que modificar también la celda con el resultado obtenido.
-        cell.categoríaLabel.text = resultado!.getCategoría()
+        cell.categoríaLabel.text = resultado!.categoría
         cell.posicionLabel.text = String(indexPath.row + 1)
         cell.puntuacionLabel.text = String(resultado!.puntuación)
-        cell.timestampLabel.text = resultado!.getFecha()
+        cell.timestampLabel.text = resultado!.fecha
         
         // Asignaremos imagen en función de si está entre los primeros o no...
         var image : UIImage?
@@ -113,11 +113,8 @@ class ClasificaciónTableViewController: UITableViewController, UISearchResultsU
                 self.clasificacion!.eliminaResultado(index: indexPath.row)
             }
             
-            // Guardamos en fichero los nuevos resultados.
-            self.clasificacion!.guardaResultados()
-            
             // Actualizamos la tabla.
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
         }
     }
     
@@ -143,16 +140,6 @@ class ClasificaciónTableViewController: UITableViewController, UISearchResultsU
     func updateSearchResults(for searchController: UISearchController) {
         filtraContenido(textoBúsqueda: self.searchController.searchBar.text!)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     
     //MARK: Action

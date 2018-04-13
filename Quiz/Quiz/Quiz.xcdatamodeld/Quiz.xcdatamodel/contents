@@ -10,7 +10,14 @@
         <attribute name="respuesta4" attributeType="String" syncable="YES"/>
         <attribute name="titulo" attributeType="String" minValueString="0" syncable="YES"/>
     </entity>
+    <entity name="Resultado_DB" representedClassName="Resultado_DB" syncable="YES" codeGenerationType="class">
+        <attribute name="categoria" attributeType="String" syncable="YES"/>
+        <attribute name="fecha" attributeType="String" syncable="YES"/>
+        <attribute name="identificador" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="puntuacion" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Pregunta_DB" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="Resultado_DB" positionX="-63" positionY="45" width="128" height="105"/>
     </elements>
 </model>

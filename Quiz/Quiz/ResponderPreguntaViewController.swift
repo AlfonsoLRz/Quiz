@@ -234,7 +234,5 @@ class ResponderPreguntaViewController: UIViewController {
         // Primer color de fondo...
         let indiceColor = self.getColorAleatorio()
         fondoView.backgroundColor = colorFondo[indiceColor]
-        
-        print(indiceColor)
     }
 }

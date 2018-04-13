@@ -51,7 +51,6 @@ class ResultadosViewController: UIViewController {
         
         //IMPORTANTE: Guardamos los resultados de esta partida en la clasificación.
         self.clasificacion!.añadeResultado(categoría: self.partida!.getCategoría(), puntuación: self.partida!.getPuntuación())
-        self.clasificacion!.guardaResultados()
         
         // Labels dependientes del resultado de la partida.
         if self.victoria! {
