@@ -20,11 +20,11 @@ class ResponderPreguntaViewController: UIViewController {
     
     // Colores de fondo posibles
     let colorFondo = [
-        UIColor(red: 256, green: 0, blue: 0, alpha: 0.2),
+        UIColor(red: 256, green: 0, blue: 0, alpha: 0.1),
         UIColor(red: 0, green: 256, blue: 0, alpha: 0.4),
         UIColor(red: 0, green: 0, blue: 256, alpha: 0.3),
         UIColor(red: 256, green: 256, blue: 0, alpha: 0.4),
-        UIColor(red: 256, green: 0, blue: 256, alpha: 0.5),
+        UIColor(red: 256, green: 0, blue: 256, alpha: 0.3),
         UIColor(red: 0, green: 256, blue: 256, alpha: 0.5),
         UIColor(red: 256, green: 256, blue: 256, alpha: 1)
     ]
