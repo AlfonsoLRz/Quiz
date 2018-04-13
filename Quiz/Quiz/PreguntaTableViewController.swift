@@ -127,7 +127,6 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
                 self.gestionPreguntas!.eliminarPregunta(index: indexPath.row)
             }
             
-            self.gestionPreguntas!.guardaPreguntas()
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -267,9 +266,6 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
                 self.gestionPreguntas!.añadirPreguntas(preguntas: [pregunta])
                 tableView.insertRows(at: [nuevoIndice], with: .automatic)
             }
-            
-            // Guardamos cambios en fichero.
-            self.gestionPreguntas!.guardaPreguntas()
         }
     }
 

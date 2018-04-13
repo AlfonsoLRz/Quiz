@@ -6,6 +6,7 @@
 //  Copyright © 2018 AlfonsoLR. All rights reserved.
 //
 
+import CoreData
 import Foundation
 import os.log
 import UIKit
@@ -14,6 +15,9 @@ class Pregunta : NSObject, NSCoding {
 
     //MARK: Atributos
     
+    static var siguienteId = 0
+    
+    var identificador : Int
     var titulo : String
     var imagen : UIImage?
     var categoria : String?
@@ -63,12 +67,32 @@ class Pregunta : NSObject, NSCoding {
             }
         }
         
+        self.identificador = Pregunta.siguienteId
         self.titulo = titulo
         self.imagen = imagen
         self.categoria = categoria
         self.respuestas = respuestas
         mensaje = ""    // No había ningún fallo.
+        
+        Pregunta.siguienteId = Pregunta.siguienteId + 1
     }
+    
+    convenience init?(preguntaBD: NSManagedObject) {
+        let titulo = preguntaBD.value(forKeyPath: "titulo") as? String
+        let imagenData = preguntaBD.value(forKeyPath: "imagen") as? Data
+        let imagen = (imagenData != nil) ? UIImage(data: imagenData!) : nil
+        let categoria = preguntaBD.value(forKeyPath: "categoria") as? String?
+        
+        // Respuestas.
+        let respuesta1 = preguntaBD.value(forKeyPath: "respuesta1") as? String
+        let respuesta2 = preguntaBD.value(forKeyPath: "respuesta2") as? String
+        let respuesta3 = preguntaBD.value(forKeyPath: "respuesta3") as? String
+        let respuesta4 = preguntaBD.value(forKeyPath: "respuesta4") as? String
+        
+        var mensaje = ""
+        self.init(titulo: titulo!, imagen: imagen, categoria: categoria!, respuestas: [respuesta1!, respuesta2!, respuesta3!, respuesta4!], mensaje: &mensaje)
+    }
+    
     
     //MARK: NSCoding
     
