@@ -12,14 +12,20 @@ class ClasificaciónTableViewController: UITableViewController, UISearchResultsU
     
     //MARK: Atributos
     
-    var clasificacion : Clasificación?
-    private var resultadosFiltrados = [ResultadoPartida]()
+    var clasificacion : Clasificación?                          // Clase que gestiona todos los resultados.
+    private var resultadosFiltrados = [ResultadoPartida]()      // Resultados de una búsqueda concreta.
     
     
     //MARK: Atributos relacionados con la interfaz
-    private let searchController = UISearchController(searchResultsController: nil)
+    
+    private let searchController = UISearchController(searchResultsController: nil)     // Controlador de la barra de búsqueda.
 
     
+    /**
+     
+     Acciones a llevar a cabo cuando se cargue la vista. Se inicializa la clasificación, la barra de búsqueda...
+     
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,10 +51,21 @@ class ClasificaciónTableViewController: UITableViewController, UISearchResultsU
     
     // MARK: Table view data source
 
+    /**
+     
+     Número de secciones en la tabla. Sólo tendremos una, que serán los resultados.
+     
+    */
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
+    /**
+     
+     Devuelve el número de elementos en la sección especificada. Nótese que al devolver sólo una sección, sólo nos preguntará
+     el número de resultados que debe mostrar. Esto dependerá también de si hay una búsqueda activa, o no.
+ 
+    */
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if estáFiltrando() {
             return self.resultadosFiltrados.count
@@ -57,6 +74,11 @@ class ClasificaciónTableViewController: UITableViewController, UISearchResultsU
         return self.clasificacion!.getNumResultados()
     }
 
+    /**
+     
+     Devuelve una celda a posicionar en la tabla. Nótese que habrá que configurar la celda para que tenga la imagen, posición... apropiados.
+     
+    */
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identificadorCelda = "ResultadoTableViewCell"
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identificadorCelda, for: indexPath) as? ResultadoTableViewCell else {
@@ -94,12 +116,20 @@ class ClasificaciónTableViewController: UITableViewController, UISearchResultsU
         return cell
     }
 
-    // Override to support conditional editing of the table view.
+    /**
+ 
+     Siempre es editable la tabla, luego siempre devolveremos verdadero.
+     
+    */
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    // Override to support editing the table view.
+    /**
+     
+     Edición de la tabla. Sólo utilizaremos la función de borrado.
+     
+    */
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Actualizamos la clasificación.
@@ -121,14 +151,29 @@ class ClasificaciónTableViewController: UITableViewController, UISearchResultsU
     
     //MARK: Soporte para la búsqueda.
     
+    /**
+ 
+     Devuelve un booleano en función de si la barra de búsqueda está vacía.
+     
+    */
     private func barraDeBúsquedaVacía() -> Bool {
         return self.searchController.searchBar.text?.isEmpty ?? true
     }
     
+    /**
+     
+     Devuelve un booleano en función de si hay una búsqueda activa o no.
+     
+    */
     private func estáFiltrando() -> Bool {
         return self.searchController.isActive && !barraDeBúsquedaVacía()
     }
     
+    /**
+     
+     Actualiza el contenido del vector de resultados filtrados, es decir, efectúa una búsqueda.
+     
+    */
     private func filtraContenido(textoBúsqueda: String) {
         self.resultadosFiltrados = self.clasificacion!.filtrarPorCategoria(categoria: textoBúsqueda)
         tableView.reloadData()
@@ -137,13 +182,23 @@ class ClasificaciónTableViewController: UITableViewController, UISearchResultsU
     
     //MARK: UISearchResultsUpdating
     
+    /**
+ 
+     Aviso de actualización (cambios) en la barra de búsqueda.
+     
+    */
     func updateSearchResults(for searchController: UISearchController) {
         filtraContenido(textoBúsqueda: self.searchController.searchBar.text!)
     }
     
     
-    //MARK: Action
+    //MARK: Actions
     
+    /**
+     
+     Presión de botón Volver. Se vuelve a la vista anterior, sin importar desde dónde se llame.
+     
+    */
     @IBAction func volver(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
