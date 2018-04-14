@@ -119,18 +119,22 @@ class ResponderPreguntaViewController: UIViewController {
     //MARK: Acción de botones
     
     @IBAction func presionarRespuesta1(_ sender: UIButton) {
+        self.timer?.invalidate()
         self.respuestaElegida(button: sender)
     }
     
     @IBAction func presionarRespuesta2(_ sender: UIButton) {
+        self.timer?.invalidate()
         self.respuestaElegida(button: sender)
     }
     
     @IBAction func presionarRespuesta3(_ sender: UIButton) {
+        self.timer?.invalidate()
         self.respuestaElegida(button: sender)
     }
     
     @IBAction func presionarRespuesta4(_ sender: UIButton) {
+        self.timer?.invalidate()
         self.respuestaElegida(button: sender)
     }
     

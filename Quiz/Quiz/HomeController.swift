@@ -19,9 +19,9 @@ class HomeController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if let segue = self.segueARealizar {
+            self.segueARealizar = nil
             self.performSegue(withIdentifier: segue, sender: nil)
         }
-        self.segueARealizar = nil
     }
     
     override func viewDidLoad() {
