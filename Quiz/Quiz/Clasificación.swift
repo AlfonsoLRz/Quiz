@@ -72,6 +72,9 @@ class Clasificación {
             
             // Agregamos el nuevo resultado a nuestro vector.
             self.resultados.append(nuevoResultado)
+            
+            // Ordenamos el vector.
+            self.ordenaResultados()
         } catch let error as NSError {
             print("Error al actualizar base de datos (inserción): \(error)")
         }

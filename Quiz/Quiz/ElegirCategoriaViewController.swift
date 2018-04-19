@@ -12,15 +12,21 @@ class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIP
 
     //MARK: Atributos relacionados con la UI
     
-    @IBOutlet weak var seleccionCategoria: UIPickerView!
+    @IBOutlet weak var seleccionCategoria: UIPickerView!            // PickerView con todas las categorías que podemos elegir. Como mínimo aparecerá Todas.
     
     
     //MARK: Otras propiedades
     
-    var clasificación : Clasificación?
-    var gestionPreguntas : GestionPreguntas?
+    var clasificación : Clasificación?                              // Gestión de los resultados de las partidas, almacenados en la BD y futuros.
+    var gestionPreguntas : GestionPreguntas?                        // Gestión de preguntas almacenadas y disponibles para jugar.
     
     
+    
+    /**
+     
+     Inicialización de las variables necesarias para el correcto funcionamiento de la vista. Se ejecuta antes de aparecer por primera vez.
+     
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,6 +52,12 @@ class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIP
 
     // MARK: Navigation
 
+    /**
+     
+     Preparación para un segue.
+     -ComenzarPartida: Se comienza un juego, teniendo que en cuenta que contendrá las preguntas de una categoría concreta.
+     
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
@@ -73,8 +85,14 @@ class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIP
         }
     }
     
+    /**
+     
+     Comprobación previa a un segue, donde habrá que confirmar si se debe ejecutar o no.
+     
+     */
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "ComenzarPartida" {
+            // Se podrá jugar siempre y cuando haya al menos una pregunta.
             return self.gestionPreguntas!.getNumPreguntas() > 0
         } 
         
@@ -84,6 +102,14 @@ class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIP
     
     //MARK: Actions
     
+    /**
+     
+     Método que se ejecuta al pulsar el botón de comenzar una partida.
+     
+     - parameters:
+        - sender: Botón emisor del evento.
+     
+     */
     @IBAction func comenzarPartida(_ sender: UIButton) {
         if self.gestionPreguntas!.getNumPreguntas() == 0 {
             // Creamos la alerta con el mensaje de error.
@@ -93,6 +119,11 @@ class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIP
         }
     }
     
+    /**
+ 
+     Método que se ejecuta al presionar el botón de volver.
+     
+     */
     @IBAction func volver(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
@@ -100,15 +131,30 @@ class ElegirCategoriaViewController: UIViewController, UIPickerViewDelegate, UIP
     
     // MARK: UIPickerViewDataSource
     
+    /**
+ 
+     Devuelve el número de componentes de los que se compondrá el pickerView.
+     
+    */
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         // Sólo tenemos un componente que serán las categorias.
         return 1
     }
     
+    /**
+     
+     Devuelve el número de categorías que tendremos. Nótese que nos pregunta por el número de filas en un componente (en nuestro caso sólo tendremos 1).
+ 
+    */
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return (self.gestionPreguntas?.getNumCategorias())! + 1
     }
     
+    /**
+ 
+     Devuelve la categoría que se ubica en una fila concreta del pickerView.
+     
+     */
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if row == 0 {
             return "Todas"
