@@ -14,27 +14,32 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
     //MARK: Atributos de la interfaz
     
     // Barra de navegación
-    @IBOutlet var botonGuardar: UIBarButtonItem!
+    @IBOutlet var botonGuardar: UIBarButtonItem!                    // Botón para guardar la pregunta.
     
     // Formulario
-    @IBOutlet weak var tituloPregunta: UITextField!
-    @IBOutlet weak var categoriaPregunta: UITextField!
-    @IBOutlet weak var imagenPregunta: UIImageView!
-    @IBOutlet weak var respuestaCorrecta: UITextField!
-    @IBOutlet weak var respuestaFalsa1: UITextField!
+    @IBOutlet weak var tituloPregunta: UITextField!                 // Título de la pregunta.
+    @IBOutlet weak var categoriaPregunta: UITextField!              // Categoría de la pregunta.
+    @IBOutlet weak var imagenPregunta: UIImageView!                 // Imagen de la pregunta.
+    @IBOutlet weak var respuestaCorrecta: UITextField!              // Respuesta correcta.
+    @IBOutlet weak var respuestaFalsa1: UITextField!                // Respuestas falsas...
     @IBOutlet weak var respuestaFalsa2: UITextField!
     @IBOutlet weak var respuestaFalsa3: UITextField!
     
     // Modificaciones de componentes.
-    private var imagenModificada = false
-    private var ultimoTextFieldUsado : UITextField?
+    private var imagenModificada = false                            // ¿Se ha elegido una imagen diferente de la de por defecto?
+    private var ultimoTextFieldUsado : UITextField?                 // Último text field que se ha manipulado.
     
     
     //MARK: Otros atributos.
 
-    var pregunta : Pregunta?
+    var pregunta : Pregunta?                                        // Pregunta con la información contenida en los text fields y otros campos.
     
     
+    /**
+ 
+     Método que se ejecutará al cargar la vista. Inicializa todos los campos de la vista.
+ 
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -73,10 +78,21 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
 
     // MARK: Navigation
 
+    /**
+ 
+     Preparación para dirigirnos a otra vista (segue).
+ 
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
     }
     
+    /**
+ 
+     ¿Se puede ejecutar un segue? Dependerá de si la información introducida es correcta. Se comprueba si esto es así creando una pregunta
+     con la información de la vista.
+ 
+     */
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         // Si el mensaje no es nulo la creación de pregunta no ha tenido éxito.
         if let mensaje = creaPregunta() {
@@ -94,11 +110,21 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
     
     //MARK: UIImagePickerControllerDelegate
     
+    /**
+ 
+     Cancelar selección de imagen, por lo que se elimina la ventana que se encargaba de ello.
+ 
+     */
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         // Animación para hacer desaparecer la ventana de selección de imágenes.
         dismiss(animated: true, completion: nil)
     }
     
+    /**
+     
+     Selección de una imagen concreta dentro de la librería. Se actualiza la imagen almacenada.
+ 
+     */
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         // El diccionario podría incluir múltiples representaciones de la imagen, pero queremos la original.
         guard let imagenSleccionada = info[UIImagePickerControllerOriginalImage] as? UIImage else {
@@ -116,6 +142,11 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
     
     //MARK: Actions
     
+    /**
+     
+     Evento al pulsar el botón de Cancelar. Se deshechan los cambios realizados.
+ 
+     */
     @IBAction func cancelar(_ sender: UIBarButtonItem) {
         if self.navigationItem.title == "Añadir pregunta" {
             dismiss(animated: true, completion: nil)
@@ -128,10 +159,20 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
         }
     }
     
+    /**
+ 
+     Comienzo de modificación de un text field.
+ 
+     */
     func textFieldDidBeginEditing(_ textField: UITextField) {
         ultimoTextFieldUsado = textField
     }
     
+    /**
+ 
+     Esconde el teclado al terminar de modificar un text field.
+     
+     */
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Esconde el teclado.
         textField.resignFirstResponder()
@@ -139,6 +180,11 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
         return true
     }
     
+    /**
+ 
+     Prepara la creación de una ventana donde se pueda escoger una imagen.
+ 
+     */
     @IBAction func seleccionaImagenDeLibreria(_ sender: UITapGestureRecognizer) {
         // Esconder el teclado.
         if let textField = ultimoTextFieldUsado {
@@ -157,6 +203,12 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
     
     
     //MARK: Métodos privados
+    
+    /**
+     
+     Intenta crear una pregunta con la información de la vista. Devuelve un mensaje de error si no se puede crear la pregunta.
+ 
+     */
     private func creaPregunta() -> String? {
         // Creamos la pregunta...
         let titulo = tituloPregunta.text ?? ""

@@ -12,35 +12,40 @@ class ResponderPreguntaViewController: UIViewController {
     
     //MARK: Atributos
     
-    var clasificación : Clasificación?
-    var partida : Partida?
-    var preguntaActual : Pregunta?
-    var tiempoRestante = 30
-    var timer : Timer?
+    var clasificación : Clasificación?                              // Gestor de resultados de partidas.
+    var partida : Partida?                                          // Partida en curso, con información como aciertos, tiempo medio de respuesta...
+    var preguntaActual : Pregunta?                                  // Pregunta a la que corresponde la actual vista.
+    var tiempoRestante = 30                                         // Tiempo del que dispone el usuario como máximo para responder la pregunta.
+    var timer : Timer?                                              // Timer que nos avisará cada segundo y nos ayudará con la cuenta atrás.
     
     // Colores de fondo posibles
-    let colorFondo = [
-        UIColor(red: 256, green: 0, blue: 0, alpha: 0.1),
-        UIColor(red: 0, green: 256, blue: 0, alpha: 0.4),
-        UIColor(red: 0, green: 0, blue: 256, alpha: 0.3),
-        UIColor(red: 256, green: 256, blue: 0, alpha: 0.4),
-        UIColor(red: 256, green: 0, blue: 256, alpha: 0.3),
-        UIColor(red: 0, green: 256, blue: 256, alpha: 0.5),
-        UIColor(red: 256, green: 256, blue: 256, alpha: 1)
+    let colorFondo = [                                              // Colores que puede tener la vista.
+        UIColor(red: 255, green: 0, blue: 0, alpha: 0.1),
+        UIColor(red: 0, green: 255, blue: 0, alpha: 0.4),
+        UIColor(red: 0, green: 0, blue: 255, alpha: 0.3),
+        UIColor(red: 255, green: 255, blue: 0, alpha: 0.4),
+        UIColor(red: 255, green: 0, blue: 255, alpha: 0.3),
+        UIColor(red: 0, green: 255, blue: 255, alpha: 0.5),
+        UIColor(red: 255, green: 255, blue: 255, alpha: 1)
     ]
     
     //MARK: Atributos relacionados con la interfaz
     
-    @IBOutlet weak var fondoView: UIView!
-    @IBOutlet weak var tituloLabel: UILabel!
-    @IBOutlet weak var imagen: UIImageView!
-    @IBOutlet weak var respuesta1: UIButton!
+    @IBOutlet weak var fondoView: UIView!                   // Fondo de la vista. Lo guardaremos para alterar su color.
+    @IBOutlet weak var tituloLabel: UILabel!                // Título de la pregunta.
+    @IBOutlet weak var imagen: UIImageView!                 // Imagen de la pregunta.
+    @IBOutlet weak var respuesta1: UIButton!                // Respuestas...
     @IBOutlet weak var respuesta2: UIButton!
     @IBOutlet weak var respuesta3: UIButton!
     @IBOutlet weak var respuesta4: UIButton!
-    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!                 // Label con los segundos que quedan para poder responder.
     
 
+    /**
+ 
+     Método que se ejecuta al cargarse la vista. Comprueba que dispone de las variables necesarias para poder extraer y actualizar información.
+ 
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,12 +71,17 @@ class ResponderPreguntaViewController: UIViewController {
     
     //MARK: Métodos públicos
     
+    /**
+ 
+     El timer nos avisa de que ha pasado un segundo más, se decrementa el tiempo y se actualiza el label.
+     
+     */
     @objc func decrementaTiempo() {
         self.tiempoRestante -= 1
         
         if self.tiempoRestante == -1 {
             self.timerLabel.text = "--"
-            self.timer!.invalidate()
+            self.timer!.invalidate()        // Se para el timer.
             
             self.partida!.sumarTiempo(tiempo: 30)
             self.performSegue(withIdentifier: "MostrarResultado", sender: nil)
@@ -84,7 +94,11 @@ class ResponderPreguntaViewController: UIViewController {
 
     // MARK: Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    /**
+ 
+     Preparación previa para los segues hacia otras vistas.
+ 
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
@@ -110,6 +124,11 @@ class ResponderPreguntaViewController: UIViewController {
         }
     }
     
+    /**
+     
+     Segue unwind para volver hacia esta vista. Se ejecutará desde la vista de Espera.
+ 
+    */
     @IBAction func unwindToResponderPregunta(sender: UIStoryboardSegue) {
         // Lo único que tendremos que hacer es sacar la siguiente pregunta y actualizar timers.
         self.cambiaPregunta()
@@ -118,21 +137,41 @@ class ResponderPreguntaViewController: UIViewController {
     
     //MARK: Acción de botones
     
+    /**
+ 
+     Se ha elegido una respuesta. Se para el timer y se comprueba si se ha elegido la correcta.
+ 
+     */
     @IBAction func presionarRespuesta1(_ sender: UIButton) {
         self.timer?.invalidate()
         self.respuestaElegida(button: sender)
     }
     
+    /**
+     
+     Se ha elegido una respuesta. Se para el timer y se comprueba si se ha elegido la correcta.
+     
+     */
     @IBAction func presionarRespuesta2(_ sender: UIButton) {
         self.timer?.invalidate()
         self.respuestaElegida(button: sender)
     }
     
+    /**
+     
+     Se ha elegido una respuesta. Se para el timer y se comprueba si se ha elegido la correcta.
+     
+     */
     @IBAction func presionarRespuesta3(_ sender: UIButton) {
         self.timer?.invalidate()
         self.respuestaElegida(button: sender)
     }
     
+    /**
+     
+     Se ha elegido una respuesta. Se para el timer y se comprueba si se ha elegido la correcta.
+     
+     */
     @IBAction func presionarRespuesta4(_ sender: UIButton) {
         self.timer?.invalidate()
         self.respuestaElegida(button: sender)
@@ -163,6 +202,12 @@ class ResponderPreguntaViewController: UIViewController {
     
     //MARK: Métodos privados
     
+    /**
+ 
+     Actualiza la información de una partida después de pulsar el botón de una de las respuestas.
+     Se comprueba si es un acierto, y siempre se añade el tiempo empleado para responder.
+ 
+     */
     private func actualizaPartida(sender: UIButton?) {
         // Primero actualizaremos los aciertos; nos servirá para decidir si mostrar resultado final o la pantalla de siguiente pregunta.
         let respuestas = self.preguntaActual!.respuestas
@@ -195,6 +240,11 @@ class ResponderPreguntaViewController: UIViewController {
         self.partida!.sumarTiempo(tiempo: 30 - self.tiempoRestante)
     }
     
+    /**
+     
+     Consigue una nueva pregunta para mostrarse y prepara la vista (timer).
+ 
+     */
     private func cambiaPregunta() {
         self.preguntaActual = partida!.getSiguientePregunta()!
         self.preparaVista(pregunta: self.preguntaActual!)
@@ -202,10 +252,20 @@ class ResponderPreguntaViewController: UIViewController {
         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ResponderPreguntaViewController.decrementaTiempo), userInfo: nil, repeats: true)
     }
     
+    /**
+     
+     Devuelve el índice de un color aleatorio.
+ 
+     */
     private func getColorAleatorio() -> Int {
         return Int(arc4random_uniform(UInt32(self.colorFondo.count)))
     }
     
+    /**
+ 
+     Modifica la información de la vista para mostrar una nueva pregunta. Esto es útil ya que nuestra vista se reutiliza para diferentes preguntas, no se crea una por cada pregunta de la base de datos.
+ 
+     */
     private func preparaVista(pregunta: Pregunta) {
         self.title = "Pregunta \(self.partida!.getPreguntasUtilizadas()) de \(self.partida!.getTotalPreguntas())"
         self.tituloLabel.text = pregunta.titulo

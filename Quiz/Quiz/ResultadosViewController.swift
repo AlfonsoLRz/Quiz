@@ -12,27 +12,33 @@ class ResultadosViewController: UIViewController {
     
     //MARK: Atributos relacionados con la interfaz
     
-    @IBOutlet weak var cabeceraLabel: UILabel!
-    @IBOutlet weak var descripciónLabel: UILabel!
-    @IBOutlet weak var imagen: UIImageView!
-    @IBOutlet weak var aciertosLabel: UILabel!
-    @IBOutlet weak var puntuaciónLabel: UILabel!
-    @IBOutlet weak var tiempoMedioLabel: UILabel!
+    @IBOutlet weak var cabeceraLabel: UILabel!              // Título de la vista: varía en función de si es una victoria, derrota...
+    @IBOutlet weak var descripciónLabel: UILabel!           // Descripción debajo del título. También depende del resultado.
+    @IBOutlet weak var imagen: UIImageView!                 // Imagen de la vista. Igualmente varía en función de si es una victoria o una derrota.
+    @IBOutlet weak var aciertosLabel: UILabel!              // Estadísticas: número de aciertos.
+    @IBOutlet weak var puntuaciónLabel: UILabel!            // Estadísticas: puntuación obtenida.
+    @IBOutlet weak var tiempoMedioLabel: UILabel!           // Estadísticas: tiempo medio por respuesta.
+    
     
     //MARK: Atributos
     
     // Constantes
-    private let CABECERA_VICTORIA = "¡Enhorabuena!"
-    private let CABECERA_DERROTA = "¡Vaya!"
+    private let CABECERA_VICTORIA = "¡Enhorabuena!"         // Título para una victoria.
+    private let CABECERA_DERROTA = "¡Vaya!"                 // Título para la derrota.
     
-    private let DESCRIPCIÓN_VICTORIA = "Has completado el test sin fallos"
-    private let DESCRIPCIÓN_DERROTA = "No has completado el test sin fallos"
+    private let DESCRIPCIÓN_VICTORIA = "Has completado el test sin fallos"          // Descripción para una victoria.
+    private let DESCRIPCIÓN_DERROTA = "No has completado el test sin fallos"        // Descripción para una derrota.
     
-    var clasificacion : Clasificación?
-    var partida : Partida?
-    var victoria : Bool?
+    var clasificacion : Clasificación?          // Gestor de resultados obtenidos por el jugador.
+    var partida : Partida?                      // Partida desarrollada previamente (hasta llegar a esta vista).
+    var victoria : Bool?                        // Resultado de la partida: victoria o derrota.
 
 
+    /**
+ 
+     Método que se ejecutará una vez se cargue la vista. Comprueba que tiene todas las variables que necesite para poder extraer información.
+     
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -80,6 +86,11 @@ class ResultadosViewController: UIViewController {
 
     // MARK: Navigation
 
+    /**
+     
+     Preparación para dirigirnos hacia otra vista.
+ 
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier ?? "" {
         case"ConsultarRanking":
@@ -111,17 +122,32 @@ class ResultadosViewController: UIViewController {
     
     //MARK: Actions
     
+    /**
+     
+     Evento de pulsar el botón de compartir. Nos saldrá una ventana con todas las aplicaciones donde podemos hacer alguna acción.
+ 
+     */
     @IBAction func compartir(_ sender: UIButton) {
-        // Necesitamos crear la alerta donde se mostrarán las diferentes posibilidades.
+        // Necesitamos crear la alerta donde se mostrarán las diferentes posibilidades. Se adjunta un texto con el resultado y nuestro logo.
         let activityController = UIActivityViewController(activityItems: ["¡Acabo de conseguir una puntuación de \(self.partida!.getPuntuación()) con \(self.partida!.getTiempoMedio()) aciertos!",
             #imageLiteral(resourceName: "DefaultImage")], applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
     }
     
+    /**
+     
+     Evento que se ejecuta al pulsar el botón de Salir. Nos dirige hacia Home.
+ 
+     */
     @IBAction func salir(_ sender: UIBarButtonItem) {
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
+    /**
+     
+     Evento que se ejecutará cuando se pulse el botón de Volver a jugar. Vuelve a Home, y se ejecuta el segue de Jugar.
+ 
+     */
     @IBAction func volverAJugar(_ sender: UIButton) {
         self.performSegue(withIdentifier: "VolverAJugar", sender: sender)
     }

@@ -12,11 +12,16 @@ class HomeController: UIViewController {
     
     // MARK: Atributos
     
-    private let clasificacion = Clasificación()
-    private let gestionPreguntas = GestionPreguntas()
-    var segueARealizar : String?
+    private let clasificacion = Clasificación()             // Gestor de resultados de partidas.
+    private let gestionPreguntas = GestionPreguntas()       // Gestor de preguntas existentes en la base de datos.
+    var segueARealizar : String?                            // Segue que debemos realizar cuando la vista aparezca. Nótese que al comienzo de la aplicación no tendrá que hacer ningún segue, pero sí en otras situaciones.
     
     
+    /**
+     
+     Método que se ejecuta cuando la vista ya ha aparecido. Ejecutará el segue contenido en segueARealizar, si lo hay.
+ 
+     */
     override func viewDidAppear(_ animated: Bool) {
         if let segue = self.segueARealizar {
             self.segueARealizar = nil
@@ -24,6 +29,11 @@ class HomeController: UIViewController {
         }
     }
     
+    /**
+     
+     Método que se ejecuta una vez la vista se ha cargado. Todas las variables están ya inicializadas, luego no hará inicializar alguna.
+     
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -36,6 +46,11 @@ class HomeController: UIViewController {
     
     // MARK: Navigation
     
+    /**
+     
+     Preparación para una navegación concreta hacia alguna vista.
+     
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
     
@@ -67,6 +82,12 @@ class HomeController: UIViewController {
         }
     }
     
+    /**
+     
+     Será el método de vuelta atrás que ejecuten vistas posteriores. Dado que sólo utilizan el atributo segueARealizar, no hace falta realizar
+     acción alguna en este método.
+     
+     */
     @IBAction func unwindToHome(sender: UIStoryboardSegue) {
         // Idle
     }

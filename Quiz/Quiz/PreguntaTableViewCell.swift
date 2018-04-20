@@ -12,9 +12,12 @@ class PreguntaTableViewCell: UITableViewCell {
     
     //MARK: Atributos de la interfaz
     
-    @IBOutlet weak var imagenPregunta: UIImageView!
-    @IBOutlet weak var preguntaLabel: UILabel!
-    @IBOutlet weak var categoriaLabel: UILabel!
+    @IBOutlet weak var imagenPregunta: UIImageView!     // Imagen de la pregunta.
+    @IBOutlet weak var preguntaLabel: UILabel!          // Título de la pregunta.
+    @IBOutlet weak var categoriaLabel: UILabel!         // Categoría de la pregunta.
+    
+    
+    //MARK: UITableViewCell
     
     override func awakeFromNib() {
         super.awakeFromNib()

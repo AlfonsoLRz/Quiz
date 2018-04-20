@@ -91,5 +91,9 @@ class Pregunta {
         
         var mensaje = ""
         self.init(titulo: titulo!, imagen: imagen, categoria: categoria!, respuestas: [respuesta1!, respuesta2!, respuesta3!, respuesta4!], mensaje: &mensaje)
+        
+        // Disponemos de identificador, no hacía falta asignar uno nuevo.
+        self.identificador = (preguntaBD.value(forKeyPath: "identificador") as? Int)!
+        Pregunta.siguienteId -= 1
     }
 }

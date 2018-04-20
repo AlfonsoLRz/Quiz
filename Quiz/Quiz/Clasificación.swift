@@ -66,6 +66,9 @@ class Clasificación {
         nuevoResultado.setValue(ResultadoPartida.siguienteId, forKey: "identificador")
         nuevoResultado.setValue(ResultadoPartida.getFecha(fecha: Date()), forKey: "fecha")
         
+        // Actualizamos el siguiente id.
+        ResultadoPartida.siguienteId += 1
+        
         // Guardamos nuevo estado en la base de datos.
         do {
             try self.contexto!.save()
