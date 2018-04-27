@@ -59,6 +59,12 @@ class ResponderPreguntaViewController: UIViewController {
             fatalError("Necesitamos una partida adecuada de donde poder obtener las preguntas.")
         }
         
+        // Centramos texto en las respuestas.
+        self.respuesta1.titleLabel?.textAlignment = NSTextAlignment.center
+        self.respuesta2.titleLabel?.textAlignment = NSTextAlignment.center
+        self.respuesta3.titleLabel?.textAlignment = NSTextAlignment.center
+        self.respuesta4.titleLabel?.textAlignment = NSTextAlignment.center
+        
         // Primera pregunta.
         self.cambiaPregunta()
     }

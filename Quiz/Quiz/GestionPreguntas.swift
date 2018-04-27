@@ -40,11 +40,19 @@ class GestionPreguntas {
         
         // Intentamos cargar las preguntas.
         if let preguntas = cargaPreguntas() {
-            self.preguntas += preguntas
-            self.categorias = self.getCategorías()
-            Pregunta.siguienteId = self.getMaxIdentificador() + 1
-        } else {
+            if preguntas.count > 0 {
+                self.preguntas += preguntas
+                self.categorias = self.getCategorías()
+                Pregunta.siguienteId = self.getMaxIdentificador() + 1
+            }
+        }
+        
+        // Si no tenemos preguntas, cargamos nuestros samples.
+        if self.preguntas.count == 0 {
             Pregunta.siguienteId = 0
+            
+            // Cargamos una serie de preguntas (samples).
+            self.cargaEjemplos()
         }
     }
     
@@ -219,6 +227,16 @@ class GestionPreguntas {
     
     
     //MARK: Métodos privados
+    
+    private func cargaEjemplos() {
+        // Mensaje de error.
+        var mensaje = ""
+        
+        // Primera pregunta.
+        let pregunta1 = Pregunta(titulo: "¿Qué es Swift?", imagen: UIImage(named: "SampleIcon"), categoria: "Programación", respuestas: ["Un lenguaje programado", "Una cantante", "Un coche ecológico","El motivo de nuestro sufrimiento"], mensaje: &mensaje)
+        let pregunta2 = Pregunta(titulo: "Qué es una variable opcional?", imagen: UIImage(named: "SampleIcon"), categoria: "Programación", respuestas: ["Una variable que puede tener valor nulo, o no", "Una variable que podemos definir sólo si queremos", "Una constante con valor nulo", "Una variable que tendrá un valor aleatorio siempre que la consultemos"], mensaje: &mensaje)
+        self.añadirPreguntas(preguntas: [pregunta1!, pregunta2!])
+    }
     
     /**
  
