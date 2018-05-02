@@ -139,6 +139,7 @@ class ResultadosViewController: UIViewController {
      Muestra una ventana para publicar un tweet con un mensaje por defecto y una imagen.
 
      */
+    func componerMensajeTwitter() {
         guard let imagen = UIImage(named: "DefaultImage") else {
             print("Fallo al crear la imagen para compartir")
             return
