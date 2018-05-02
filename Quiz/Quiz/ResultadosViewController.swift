@@ -107,13 +107,6 @@ class ResultadosViewController: UIViewController {
             }
             
             homeController.segueARealizar = "SeleccionarCategoría"
-        case "ConsultarRanking":
-            let destinationNavigation = segue.destination as? UINavigationController
-            guard let mostrarClasificación = destinationNavigation?.topViewController as? ClasificaciónTableViewController else {
-                fatalError("Destino de navegación inesperado: \(segue.destination)")
-            }
-            
-            mostrarClasificación.clasificacion = self.clasificacion
         default:
             fatalError("Identificador de segue desconocido: \(String(describing: segue.identifier))")
         }

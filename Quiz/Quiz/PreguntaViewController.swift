@@ -62,7 +62,6 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
             respuestaFalsa3.text = pregunta.respuestas[3]
             
             self.imagenModificada = pregunta.imagen != nil
-            self.pregunta = nil
             
             // Configuramos el título de la barra de navegación.
             self.navigationItem.title = "Modificar pregunta"
@@ -148,6 +147,44 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
  
      */
     @IBAction func cancelar(_ sender: UIBarButtonItem) {
+        // Mostramos una alerta si se han introducido datos...
+        if (self.haIntroducidoDatos()) {
+            // Creamos la alerta para preguntarle si de verdad quiere cancelar
+            let alert = UIAlertController(title: "Cancelar", message: "¿Estás seguro de que no quieres guardar la pregunta?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Sí", style: .default, handler: retirarVista))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            self.retirarVista(alert: nil)
+        }
+    }
+    
+    /**
+ 
+     Devuelve un booleano en función de si ha introducido datos o no.
+     
+     */
+    func haIntroducidoDatos() -> Bool {
+        if (navigationItem.title == "Añadir pregunta") {
+            return (!(self.tituloPregunta.text?.isEmpty)!) || (self.imagenModificada) || (!(self.categoriaPregunta.text?.isEmpty)!) || (!(self.respuestaCorrecta.text?.isEmpty)!)
+                || (!(self.respuestaFalsa1.text?.isEmpty)!) || (!(self.respuestaFalsa2.text?.isEmpty)!) || (!(self.respuestaFalsa3.text?.isEmpty)!)
+        } else {
+            if let pregunta = self.pregunta {
+                return (self.tituloPregunta.text != pregunta.titulo) || (self.imagenPregunta.image != pregunta.imagen) || (self.categoriaPregunta.text != pregunta.categoria) || (self.respuestaCorrecta.text != pregunta.respuestas[0])
+                    || (self.respuestaFalsa1.text != pregunta.respuestas[1]) || (self.respuestaFalsa2.text != pregunta.respuestas[2]) || (self.respuestaFalsa3.text != pregunta.respuestas[3])
+            }
+        }
+        
+        return false
+    }
+    
+    /**
+ 
+     Elimina la vista, teniendo en cuenta el tipo de segue del que apareció.
+ 
+     */
+    func retirarVista(alert: UIAlertAction?) {
+        // Si responde que sí debemos quitar la vista...
         if self.navigationItem.title == "Añadir pregunta" {
             dismiss(animated: true, completion: nil)
         } else if self.navigationItem.title == "Modificar pregunta" {
