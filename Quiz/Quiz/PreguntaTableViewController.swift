@@ -169,10 +169,10 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
      */
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let alert = UIAlertController(title: "Eliminar comida", message: "¿Estás seguro de que quieres eliminar la comida? No hay vuelta atrás...", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Eliminar pregunta", message: "¿Estás seguro de que quieres eliminar la pregunta? No hay vuelta atrás...", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Sí", style: .default, handler: { action in
-                self.eliminaPregunta(tableView, indexPath)
+                self.eliminaPregunta(tableView: tableView, indexPath: indexPath)
             }))
             self.present(alert, animated: true, completion: nil)
         }
