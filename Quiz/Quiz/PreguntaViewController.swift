@@ -150,7 +150,7 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
         // Mostramos una alerta si se han introducido datos...
         if (self.haIntroducidoDatos()) {
             // Creamos la alerta para preguntarle si de verdad quiere cancelar
-            let alert = UIAlertController(title: "Cancelar", message: "¿Estás seguro de que no quieres guardar la pregunta?", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Cancelar", message: "¿Estás seguro de que quieres salir sin guardar la pregunta?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Sí", style: .default, handler: retirarVista))
             self.present(alert, animated: true, completion: nil)
