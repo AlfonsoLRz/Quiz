@@ -6,9 +6,11 @@
 //  Copyright © 2018 AlfonsoLR. All rights reserved.
 //
 
+import TwitterKit
+import TwitterCore
 import UIKit
 
-class ResultadosViewController: UIViewController {
+class ResultadosViewController: UIViewController, TWTRComposerViewControllerDelegate {
 
     //MARK: Atributos relacionados con la interfaz
 
@@ -30,6 +32,7 @@ class ResultadosViewController: UIViewController {
     private let DESCRIPCIÓN_DERROTA = "No has completado el test sin fallos"        // Descripción para una derrota.
 
     var clasificacion : Clasificación?          // Gestor de resultados obtenidos por el jugador.
+    var compartirPresionado = false             // Nos indica si el botón de compartir por Twitter ha sido presionado.
     var partida : Partida?                      // Partida desarrollada previamente (hasta llegar a esta vista).
     var victoria : Bool?                        // Resultado de la partida: victoria o derrota.
 
@@ -111,6 +114,22 @@ class ResultadosViewController: UIViewController {
             fatalError("Identificador de segue desconocido: \(String(describing: segue.identifier))")
         }
     }
+    
+    
+    //MARK: TWTRComposerViewDelegate
+    // Recogemos los eventos simplemente para seguir con el flujo de la API. La variable compartirPresionado pasa a false, ya no estamos
+    // en la ventana de Twitter.
+    func composerDidCancel(_ controller: TWTRComposerViewController) {
+        self.compartirPresionado = false
+    }
+    
+    func composerDidSucceed(_ controller: TWTRComposerViewController, with tweet: TWTRTweet) {
+        self.compartirPresionado = false
+    }
+    
+    func composerDidFail(_ controller: TWTRComposerViewController, withError error: Error) {
+        self.compartirPresionado = false
+    }
 
 
     //MARK: Actions
@@ -121,14 +140,17 @@ class ResultadosViewController: UIViewController {
 
      */
     @IBAction func compartir(_ sender: UIButton) {
+        // Cambiamos el estado...
+        self.compartirPresionado = true
+        
         // Debe haber al menos un usuario loggeado...
-        if (Twitter.sharedInstance().sessionStore.hasLoggedInUsers()) {
+        if (TWTRTwitter.sharedInstance().sessionStore.hasLoggedInUsers()) {
             self.componerMensajeTwitter()
         } else {
             // Log in, and then check again
-            Twitter.sharedInstance().login { session, error in
-                if let session = session {
-                  self.componerMensajeTwitter()
+            TWTRTwitter.sharedInstance().logIn { session, error in
+                if let _ = session {
+                    self.componerMensajeTwitter()
                 }
             }
         }
@@ -145,7 +167,7 @@ class ResultadosViewController: UIViewController {
             return
         }
 
-        let composer = TWTRComposerViewController.init(initialText: "¡Acabo de conseguir una puntuación de \(self.partida!.getPuntuación()) con \(self.partida!.getTiempoMedio()) aciertos!", image: imagen, videoURL: nil)
+        let composer = TWTRComposerViewController.init(initialText: "¡Acabo de conseguir una puntuación de \(self.partida!.getPuntuación()) con \(self.partida!.getAciertos()) aciertos en Quiz!", image: imagen, videoURL: nil)
         composer.delegate = self
         present(composer, animated: true, completion: nil)
     }

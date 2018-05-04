@@ -13,6 +13,7 @@ class ResponderPreguntaViewController: UIViewController {
     //MARK: Atributos
 
     var clasificación : Clasificación?                              // Gestor de resultados de partidas.
+    var mostrarResultadoController : ResultadosViewController?      // Vista encargada de mostrar el resultado.
     var partida : Partida?                                          // Partida en curso, con información como aciertos, tiempo medio de respuesta...
     var preguntaActual : Pregunta?                                  // Pregunta a la que corresponde la actual vista.
     var tiempoRestante = 30                                         // Tiempo del que dispone el usuario como máximo para responder la pregunta.
@@ -20,13 +21,13 @@ class ResponderPreguntaViewController: UIViewController {
 
     // Colores de fondo posibles
     let colorFondo = [                                              // Colores que puede tener la vista.
-        UIColor(red: 255, green: 0, blue: 0, alpha: 0.1),
-        UIColor(red: 0, green: 255, blue: 0, alpha: 0.4),
-        UIColor(red: 0, green: 0, blue: 255, alpha: 0.3),
-        UIColor(red: 255, green: 255, blue: 0, alpha: 0.4),
-        UIColor(red: 255, green: 0, blue: 255, alpha: 0.3),
-        UIColor(red: 0, green: 255, blue: 255, alpha: 0.5),
-        UIColor(red: 255, green: 255, blue: 255, alpha: 1)
+        UIColor(red: 1, green: 0, blue: 0, alpha: 0.1),
+        UIColor(red: 0, green: 1, blue: 0, alpha: 0.4),
+        UIColor(red: 0, green: 0, blue: 1, alpha: 0.3),
+        UIColor(red: 1, green: 1, blue: 0, alpha: 0.4),
+        UIColor(red: 1, green: 0, blue: 1, alpha: 0.3),
+        UIColor(red: 0, green: 1, blue: 1, alpha: 0.5),
+        UIColor(red: 1, green: 1, blue: 1, alpha: 1)
     ]
 
     //MARK: Atributos relacionados con la interfaz
@@ -67,6 +68,21 @@ class ResponderPreguntaViewController: UIViewController {
 
         // Primera pregunta.
         self.cambiaPregunta()
+    }
+    
+    /**
+ 
+     Método que se llama cuando aparezca la vista. Si el controlador de resultados que mostramos tiene el botón de twitter presionado
+     volvemos a mostrar otra vista de resultados.
+     ¿Por qué? TwitterKit tiene un bug, y al pulsar Done en el proceso de Log in, hace dismiss a la vista de resultados...
+ 
+     */
+    override func viewDidAppear(_ animated: Bool) {
+        if let mostrarResultadoController = self.mostrarResultadoController {
+            if (mostrarResultadoController.compartirPresionado) {
+                self.performSegue(withIdentifier: "MostrarResultado", sender: nil)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -122,9 +138,10 @@ class ResponderPreguntaViewController: UIViewController {
                 fatalError("Destino de navegación inesperado: \(segue.destination)")
             }
 
-            mostrarResultadoController.clasificacion = self.clasificación
-            mostrarResultadoController.partida = self.partida
-            mostrarResultadoController.victoria = self.partida!.getAciertos() == self.partida!.getTotalPreguntas()
+            self.mostrarResultadoController = mostrarResultadoController
+            self.mostrarResultadoController!.clasificacion = self.clasificación
+            self.mostrarResultadoController!.partida = self.partida
+            self.mostrarResultadoController!.victoria = self.partida!.getAciertos() == self.partida!.getTotalPreguntas()
         default:
             fatalError("Identificador de navegación desconocido. ")
         }

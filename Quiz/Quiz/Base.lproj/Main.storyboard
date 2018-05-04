@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gnm-nr-bJw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gnm-nr-bJw">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-            <string>HelveticaNeue-Bold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Home-->
         <scene sceneID="tne-QT-ifu">
@@ -157,7 +151,7 @@
                     <navigationItem key="navigationItem" title="Home" id="Pr8-yE-zXD">
                         <barButtonItem key="rightBarButtonItem" image="ConfigBoton" id="95X-EX-BUp">
                             <connections>
-                                <segue destination="SB3-sq-1lH" kind="show" identifier="GestionarPreguntas" action="showDetailViewController:sender:" id="BWq-uL-iyl"/>
+                                <segue destination="SB3-sq-1lH" kind="show" identifier="GestionarPreguntas" id="BWq-uL-iyl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1196,12 +1190,12 @@
                                                         </constraints>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRx-kN-XIk" customClass="RoundedButton" customModule="Quiz" customModuleProvider="target">
-                                                        <rect key="frame" x="157" y="581" width="100" height="40"/>
+                                                        <rect key="frame" x="117" y="581" width="180" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="54x-GQ-C3P"/>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="I0a-W8-Vr6"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="I0a-W8-Vr6"/>
                                                         </constraints>
-                                                        <state key="normal" title="Compartir"/>
+                                                        <state key="normal" title="Compartir en Twitter"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                 <real key="value" value="2"/>
@@ -1361,7 +1355,7 @@
         <image name="Trofeo" width="350" height="350"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JOh-od-LN5"/>
+        <segue reference="pK1-uy-NUx"/>
         <segue reference="Rxw-e9-uVu"/>
     </inferredMetricsTieBreakers>
 </document>

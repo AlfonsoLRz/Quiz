@@ -14,18 +14,20 @@ import TwitterKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-      TWTRTwitter.sharedInstance().start(withConsumerKey:"WPBBQUdphPj1EgaN6l5GU1w7f", consumerSecret:"QOAjtUfEALdC82jHGwXx4JDWhee3XWJM3L1rXBzjTiSQjDzv52")
-
-      return true
-    }
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        TWTRTwitter.sharedInstance().start(withConsumerKey:"WPBBQUdphPj1EgaN6l5GU1w7f", consumerSecret:"QOAjtUfEALdC82jHGwXx4JDWhee3XWJM3L1rXBzjTiSQjDzv52")
+        
         return true
     }
-
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        TWTRTwitter.sharedInstance().application(app, open: url, options: options)
+        
+        return true
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
