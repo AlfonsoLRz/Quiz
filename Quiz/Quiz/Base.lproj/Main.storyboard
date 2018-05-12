@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gnm-nr-bJw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gnm-nr-bJw">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-            <string>HelveticaNeue-Bold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Home-->
         <scene sceneID="tne-QT-ifu">
@@ -157,7 +151,7 @@
                     <navigationItem key="navigationItem" title="Home" id="Pr8-yE-zXD">
                         <barButtonItem key="rightBarButtonItem" image="ConfigBoton" id="95X-EX-BUp">
                             <connections>
-                                <segue destination="SB3-sq-1lH" kind="show" identifier="GestionarPreguntas" action="showDetailViewController:sender:" id="BWq-uL-iyl"/>
+                                <segue destination="SB3-sq-1lH" kind="show" identifier="GestionarPreguntas" id="BWq-uL-iyl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -191,7 +185,7 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FHm-ga-OXk">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FHm-ga-OXk">
                                             <rect key="frame" x="0.0" y="2.6666666666666643" width="105" height="105"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="105" id="GUx-k8-qmU"/>
@@ -310,7 +304,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="250" placeholderIntrinsicHeight="250" image="NoImagen" translatesAutoresizingMaskIntoConstraints="NO" id="hdp-Ia-1LF">
+                                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="250" placeholderIntrinsicHeight="250" image="NoImagen" translatesAutoresizingMaskIntoConstraints="NO" id="hdp-Ia-1LF">
                                                         <rect key="frame" x="53.666666666666657" y="145.66666666666663" width="249.99999999999997" height="250"/>
                                                         <gestureRecognizers/>
                                                         <constraints>
