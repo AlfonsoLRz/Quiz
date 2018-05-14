@@ -171,7 +171,7 @@ class PreguntaTableViewController: UITableViewController, UISearchResultsUpdatin
         if editingStyle == .delete {
             let alert = UIAlertController(title: "Eliminar pregunta", message: "¿Estás seguro de que quieres eliminar la pregunta? No hay vuelta atrás...", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Sí", style: .default, handler: { action in
+            alert.addAction(UIAlertAction(title: "Sí", style: .destructive, handler: { action in
                 self.eliminaPregunta(tableView: tableView, indexPath: indexPath)
             }))
             self.present(alert, animated: true, completion: nil)
