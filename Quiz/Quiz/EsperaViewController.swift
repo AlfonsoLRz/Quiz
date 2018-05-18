@@ -49,7 +49,12 @@ class EsperaViewController: UIViewController {
  
      */
     @IBAction func salir(_ sender: UIBarButtonItem) {
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        let alert = UIAlertController(title: "Salir de la partida", message: "¿Estás seguro de que quieres salir de la partida?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Sí", style: .destructive, handler: { action in
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)    // Si pulsa 'Sí', quitamos la vista...
+        }))
+		alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     

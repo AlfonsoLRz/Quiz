@@ -151,8 +151,8 @@ class PreguntaViewController: UIViewController, UITextFieldDelegate, UIImagePick
         if (self.haIntroducidoDatos()) {
             // Creamos la alerta para preguntarle si de verdad quiere cancelar
             let alert = UIAlertController(title: "Cancelar", message: "¿Estás seguro de que quieres salir sin guardar la pregunta?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Sí", style: .destructive, handler: retirarVista))
+			alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
             self.retirarVista(alert: nil)
