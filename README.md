@@ -1,6 +1,6 @@
 ![swift](https://img.shields.io/badge/swift-4.1.1-green.svg)
 ![xcode](https://img.shields.io/badge/xcode-9.3-green.svg)
-![core-data](https://img.shields.io/badge/core data-3.2.0-green.svg)
+![core-data](https://img.shields.io/badge/core%20data-3.2.0-green.svg)
 
 # Quiz!
 **Quiz!** es un **juego de preguntas y respuestas** desarrollado en Swift para la asignatura de Desarrollo de Sofware para Dispositivos Móviles en la Universidad de Jaén.
