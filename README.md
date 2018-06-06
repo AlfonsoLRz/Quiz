@@ -6,7 +6,7 @@
 **Quiz!** es un **juego de preguntas y respuestas** desarrollado en Swift para la asignatura de Desarrollo de Sofware para Dispositivos Móviles en la Universidad de Jaén.
 
 <p align="center">
-  <img src="doc/Imágenes/Icono.png" width="300px" alt="Quiz! icon">
+  <img src="doc/Imágenes/DefaultImage.png" width="300px" alt="Quiz! icon">
 </p>
 
 ### Índice
