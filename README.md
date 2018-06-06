@@ -11,7 +11,7 @@
 
 ### Índice
 [Cómo jugar](#cómo-jugar)<br>
-[Cómo probar la aplicación](#cómo-probarlo)<br>
+[Cómo probar la aplicación](#cómo-probar-la-aplicación)<br>
 
 ## Cómo jugar
 **Quiz! permite realizar partidas con todas las preguntas de las que se compone tu base de datos**. Por defecto habrá dos preguntas para comenzar a jugar.
