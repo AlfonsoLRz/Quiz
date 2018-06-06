@@ -36,7 +36,7 @@ Al acceder a la configuración obtendremos una pantalla como la anterior, la cua
     <p align="center">
       <img src="doc/Manual/Imágenes/Añadir.png" width="200px" alt="Añadir preguntas">
     </p>
-    
+
     Todas las preguntas de Quiz! se componen de cuatro respuestas, de las cuales una será la verdadera. Además, podemos asociar las preguntas a categorías, de tal forma que al jugar podemos realizar partidas que sólo contengan preguntas de una determinada categoría.
 
     - **Eliminar preguntas**, desplazando una fila hacia la izquierda.
@@ -57,7 +57,7 @@ Como ya comentamos, **desde la pantalla principal se puede acceder a jugar una p
 </p>
 
 Una vez elegida, ¡comienza la partida!
-Las preguntas aparecen de forma aleatoria, tanto el orden de preguntas como de las respuestas.
+Las preguntas aparecen de forma aleatoria, tanto el orden de preguntas como de las respuestas. **¡Atento! Sólo tienes 30 segundos para responder cada pregunta.**
 
 <p align="center">
   <img src="doc/Manual/Imágenes/Pregunta.png" width="200px" alt="Responder pregunta">
