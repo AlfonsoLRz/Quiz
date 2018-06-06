@@ -20,7 +20,7 @@
   <img src="doc/Manual/Imágenes/Home.png" width="200px" alt="Home">
 </p>
 
-#### Configuración
+### Configuración
 
 En el caso de que no haya preguntas no se podrá jugar una partida, y para ello habrá que acceder a la **configuración**, donde podemos gestionar nuestras preguntas.
 
@@ -36,13 +36,13 @@ Al acceder a la configuración obtendremos una pantalla como la anterior, la cua
     <p align="center">
       <img src="doc/Manual/Imágenes/Añadir.png" width="200px" alt="Añadir preguntas">
     </p>
-
+    
     Todas las preguntas de Quiz! se componen de cuatro respuestas, de las cuales una será la verdadera. Además, podemos asociar las preguntas a categorías, de tal forma que al jugar podemos realizar partidas que sólo contengan preguntas de una determinada categoría.
 
     - **Eliminar preguntas**, desplazando una fila hacia la izquierda.
     - **Modificar preguntas** presionando en la fila en la que ésta se encuentra, lo que nos llevará a una vista similar a la de añadir preguntas.
 
-#### Desarrollo de partida
+### Desarrollo de partida
 
 Una vez tenemos todas las preguntas que deseamos en nuestra base de datos, ¡podemos comenzar a jugar!
 
@@ -63,13 +63,13 @@ Las preguntas aparecen de forma aleatoria, tanto el orden de preguntas como de l
   <img src="doc/Manual/Imágenes/Pregunta.png" width="200px" alt="Responder pregunta">
 </p>
 
-**¡Ojo! No podrás fallar ninguna pregunta para alcanzar la victoria**, por lo que si fallas una pregunta...
+**¡Ojo! No podrás fallar ninguna pregunta para alcanzar la victoria**, por lo que si te equivocas en una...
 
 <p align="center">
   <img src="doc/Imágenes/EmojiTriste.png" width="150px" alt="Cara triste">
 </p>
 
-Si aciertas, es posible que esto aún no hayas terminado o... **¡que hayas ganado!**
+Si aciertas, es posible que esto aún no haya terminado o... **¡que hayas ganado!**
 
 <p align="center">
   <img src="doc/Imágenes/Plata.png" width="100px" alt="Trofeo plata">
@@ -93,7 +93,7 @@ De esta forma puedes elegir volver a jugar, compartir tus resultados o consultar
 
 Puedes filtrar los resultados buscando una categoría, e incluso borrar aquellos resultados que desees, tal y como hacíamos con las preguntas (desplazando la fila hacia la izquierda).
 
-#### Diseño responsive
+### Diseño responsive
 
 La aplicación se adapta a cualquier tipo de dispositivo, ya sea un móvil (iPhone), una tablet (iPad)...
 
@@ -107,4 +107,4 @@ La aplicación se adapta a cualquier tipo de dispositivo, ya sea un móvil (iPho
 ## Cómo probar la aplicación
 Para probar la aplicación será tan fácil como clonar el proyecto o descargar la carpeta. Necesitaremos también un ordenador MacOS que contenga al menos Xcode 9.3 (disponible desde el 29 de marzo de 2018).
 
-La carpeta contiene un proyecto de Xcode de tal forma que será tan sencillo como abrir el proyecto con Xcode y ejecutarlo en cualquier dispositivo, ya sea un simulador o conectado al ordenador (iPhone, iPad...).
+La carpeta contiene un proyecto de Xcode de tal forma que será tan sencillo como abrir el proyecto con este entorno de desarrollo y ejecutarlo en cualquier dispositivo, ya sea un simulador o conectado al ordenador (iPhone, iPad...).
